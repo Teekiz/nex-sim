@@ -7,7 +7,7 @@ export function simulateDrops(rolls: number, teamsize: number, contribution: num
     let itemRolls: ItemRoll[] = [];
 
     while (rolls > 0) {
-        const tablesToRoll = rollTables(teamsize, contribution);
+        const tablesToRoll = rollTables(contribution, teamsize);
 
         const newItems = tablesToRoll
             .map(table => rollTableItems(table))
@@ -24,20 +24,19 @@ export function simulateDrops(rolls: number, teamsize: number, contribution: num
 
 function updateQuantity(existingRolls: ItemRoll[], newItem: ItemRoll, contribution: number): ItemRoll[] {
     const existingIndex = existingRolls.findIndex(item => item.itemID === newItem.itemID);
-
-    console.log("New Item to Add", newItem.name);
-    console.log("Existing array", existingRolls);
+    const adjustedQuantity =
+        newItem.quantity === 1
+            ? newItem.quantity
+            : Math.max(1, Math.floor(newItem.quantity * contribution));
 
     if (existingIndex !== -1) {
         const updated = [...existingRolls];
-        const adjustedQuantity = newItem.quantity == 1 ? newItem.quantity : Math.min(newItem.quantity * contribution);
         updated[existingIndex] = {
             ...updated[existingIndex],
             quantity: updated[existingIndex].quantity + adjustedQuantity,
         };
         return updated;
     } else {
-        //new item
-        return [...existingRolls, newItem];
+        return [...existingRolls, { ...newItem, quantity: adjustedQuantity }];
     }
 }

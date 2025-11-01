@@ -1,4 +1,4 @@
-import {getLcm} from "./mathsutility.ts";
+import {getLcm} from "./util/mathsutility.ts";
 import {Tables} from "./enum/tables.tsx";
 import type {Item} from "./types/Item.tsx";
 import type {ItemRoll} from "./types/ItemRoll.tsx";

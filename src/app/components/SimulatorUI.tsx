@@ -2,6 +2,7 @@ import {useState} from "react";
 import ItemGrid from "./ItemGrid.tsx";
 import type {ItemRow} from "../../lib/types/itemRow.tsx";
 import InputBox from "./InputBox.tsx";
+import ItemStats from "./Stats.tsx";
 
 export default function SimulatorUI()
 {
@@ -19,8 +20,9 @@ export default function SimulatorUI()
 
     return (
         <>
-            <InputBox setItems={setItems} setRolled={setTotal}></InputBox>
-            <ItemGrid items={items} timesRolled={total}></ItemGrid>
+            <InputBox setItems={setItems} setRolled={setTotal}/>
+            <ItemGrid items={items} timesRolled={total}/>
+            <ItemStats items={items}/>
         </>
     );
 }

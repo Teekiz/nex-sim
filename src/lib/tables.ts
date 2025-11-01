@@ -18,12 +18,15 @@ export function rollTables(contribution: number, teamsize: number): Tables[]
 }
 
 function rollUniqueTable(contribution: number): boolean{
-    const chance = (1/43) * contribution;
+    const contributionPercent = contribution * 100;
+    const rolls = Math.ceil(43 * (100 / contributionPercent));
+    const chance = 1 / rolls;
+
     return Math.random() < chance;
 }
 
 function rollPetTable(teamsize: number): boolean {
-    const chance = (1/43) * teamsize;
+    const chance = 1 / (500 * teamsize);
     return Math.random() < chance;
 }
 

@@ -19,6 +19,7 @@ export default function InputBox({setItems, setRolled}: InputBoxProps) {
     const handleButtonClick = () => {
         const result = simulateDrops(rolls, teamsize, contribution);
         result.map(item => incrementQuantity(item.itemID, item.quantity))
+        setRolled(prevState => prevState + rolls);
     }
 
     const incrementQuantity = (id: number, quantity: number) => {
@@ -27,7 +28,6 @@ export default function InputBox({setItems, setRolled}: InputBoxProps) {
                 row.id === id ? { ...row, quantity: row.quantity + quantity } : row
             )
         );
-        setRolled(prevState => prevState + rolls);
     };
 
     return (
@@ -37,7 +37,7 @@ export default function InputBox({setItems, setRolled}: InputBoxProps) {
             noValidate
             autoComplete="off"
             >
-                <TextField id="outlined-basic" label="Contiribution" variant="outlined" value={contribution} onChange={(e) => setContribution(Number(e.target.value))} type={"number"}/>
+                <TextField id="outlined-basic" label="Contiribution" variant="outlined" value={contribution} onChange={(e) => setContribution(parseFloat(e.target.value))} type={"number"}/>
                 <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
                 <TextField id="outlined-basic" label="Number of rolls" variant="outlined" value={rolls} onChange={(e) => setRolls(Number(e.target.value))} type={"number"}/>
 
