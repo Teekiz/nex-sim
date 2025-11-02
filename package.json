@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://Teekiz.github.io/nex-sim",
+  "homepage": "https://teekiz.github.io/nex-sim",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
