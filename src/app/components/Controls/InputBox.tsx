@@ -2,33 +2,24 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {useState} from "react";
 import {Button} from "@mui/material";
-import type {ItemRow} from "../../lib/types/itemRow.tsx";
-import {simulateDrops} from "../../lib/simulator.ts";
+import {simulateDrops} from "../../../lib/simulator.ts";
+import type {ItemRoll} from "../../../lib/types/itemRoll.tsx";
 
 interface InputBoxProps {
-    setItems: React.Dispatch<React.SetStateAction<ItemRow[]>>;
-    setRolled: React.Dispatch<React.SetStateAction<number>>;
+    incrementTotalRolls: () => void;
+    onItemRoll: (item: ItemRoll) => void;
+    updateDryStreak: (hasItemDropped: boolean) => void;
 }
 
-export default function InputBox({setItems, setRolled}: InputBoxProps) {
+export default function InputBox({incrementTotalRolls, onItemRoll, updateDryStreak}: InputBoxProps) {
 
     const [contribution, setContribution] = useState(0.33);
     const [teamsize, setteamsize] = useState(3);
     const [rolls, setRolls] = useState(10);
 
     const handleButtonClick = () => {
-        const result = simulateDrops(rolls, teamsize, contribution);
-        result.map(item => incrementQuantity(item.itemID, item.quantity))
-        setRolled(prevState => prevState + rolls);
+        simulateDrops(rolls, teamsize, contribution, incrementTotalRolls, onItemRoll, updateDryStreak);
     }
-
-    const incrementQuantity = (id: number, quantity: number) => {
-        setItems(prev =>
-            prev.map(row =>
-                row.id === id ? { ...row, quantity: row.quantity + quantity } : row
-            )
-        );
-    };
 
     return (
         <Box

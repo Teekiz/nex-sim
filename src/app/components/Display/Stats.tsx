@@ -1,4 +1,4 @@
-import type {ItemRow} from "../../lib/types/itemRow.tsx";
+import type {ItemRow} from "../../../lib/types/itemRow.tsx";
 import {Container} from "@mui/material";
 
 export default function ItemStats({items, timesRolled}: {items: ItemRow[], timesRolled: number}) {

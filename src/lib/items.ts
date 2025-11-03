@@ -1,7 +1,7 @@
 import {getLcm} from "./util/mathsutility.ts";
 import {Tables} from "./enum/tables.tsx";
-import type {Item} from "./types/Item.tsx";
-import type {ItemRoll} from "./types/ItemRoll.tsx";
+import type {Item} from "./types/item.tsx";
+import type {ItemRoll} from "./types/itemRoll.tsx";
 
 export function getItems(): readonly Item[] {
     return [
@@ -17,7 +17,7 @@ export function getItems(): readonly Item[] {
     ];
 }
 
-export function rollTableItems(targetTable: Tables): ItemRoll | null{
+export function rollTableItems(targetTable: Tables, currentTotal: number): ItemRoll | null{
      const possibleItems = getItems().filter((item) => item.table === targetTable);
      const commonDenominator = getLcm(possibleItems.map(item => item.denominator));
 
@@ -46,10 +46,11 @@ export function rollTableItems(targetTable: Tables): ItemRoll | null{
         if (roll <= cumulative)
         {
             return {
-                itemID: item.itemID,
+                id: item.itemID,
                 name: item.name,
                 //rolls between the maximum and minimum values (whole team drop)
-                quantity: Math.floor(Math.random() * (item.quantityMax - item.quantityMin + 1) + item.quantityMin)
+                quantity: Math.floor(Math.random() * (item.quantityMax - item.quantityMin + 1) + item.quantityMin),
+                droppedAt: currentTotal
             }
         }
     }

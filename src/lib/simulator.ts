@@ -1,9 +1,15 @@
 import {rollTableItems} from "./items.ts";
-import type {ItemRoll} from "./types/ItemRoll.tsx";
+import type {ItemRoll} from "./types/itemRoll.tsx";
 
 import {rollTables} from "./tables.ts";
 
-export function simulateDrops(rolls: number, teamsize: number, contribution: number): ItemRoll[]{
+export function simulateDrops(rolls: number,
+                              teamsize: number,
+                              contribution: number,
+                              incrementTotalRolls: () => void,
+                              onItemRoll: (item: ItemRoll) => void,
+                              updateDryStreak: (hasItemDropped: boolean) => void): void
+{
     let itemRolls: ItemRoll[] = [];
 
     while (rolls > 0) {
@@ -17,13 +23,13 @@ export function simulateDrops(rolls: number, teamsize: number, contribution: num
             itemRolls = updateQuantity(itemRolls, item, contribution);
         }
 
+        incrementTotalRolls();
         rolls--;
     }
-    return itemRolls;
 }
 
 function updateQuantity(existingRolls: ItemRoll[], newItem: ItemRoll, contribution: number): ItemRoll[] {
-    const existingIndex = existingRolls.findIndex(item => item.itemID === newItem.itemID);
+    const existingIndex = existingRolls.findIndex(item => item.id === newItem.id);
     const adjustedQuantity =
         newItem.quantity === 1
             ? newItem.quantity
