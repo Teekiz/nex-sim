@@ -2,23 +2,16 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {useState} from "react";
 import {Button} from "@mui/material";
-import {simulateDrops} from "../../../lib/simulator.ts";
-import type {ItemRoll} from "../../../lib/types/itemRoll.tsx";
+import {simulateDrops} from "../../../lib/simulation/simulator.ts";
 
-interface InputBoxProps {
-    incrementTotalRolls: () => void;
-    onItemRoll: (item: ItemRoll) => void;
-    updateDryStreak: (hasItemDropped: boolean) => void;
-}
-
-export default function InputBox({incrementTotalRolls, onItemRoll, updateDryStreak}: InputBoxProps) {
+export default function InputBox() {
 
     const [contribution, setContribution] = useState(0.33);
     const [teamsize, setteamsize] = useState(3);
     const [rolls, setRolls] = useState(10);
 
     const handleButtonClick = () => {
-        simulateDrops(rolls, teamsize, contribution, incrementTotalRolls, onItemRoll, updateDryStreak);
+        simulateDrops(rolls, teamsize, contribution);
     }
 
     return (

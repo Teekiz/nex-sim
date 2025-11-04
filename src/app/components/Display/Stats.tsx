@@ -1,12 +1,15 @@
-import type {ItemRow} from "../../../lib/types/itemRow.tsx";
 import {Container} from "@mui/material";
+import {useItemsStore} from "../../../stores/itemStore.ts";
+import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 
-export default function ItemStats({items, timesRolled}: {items: ItemRow[], timesRolled: number}) {
+export default function ItemStats() {
+    const items = useItemsStore(state => state.items);
+    const timesRolled = useStatisticsStore().totalRolls;
 
-    const shards = items.find(item => item.id === 7);
+    const shards = items.find(item => item.id === 8);
 
     const totalUniques = items
-        .filter(item => item.id >= 1 && item.id <= 6)
+        .filter(item => item.id >= 2 && item.id <= 7)
         .reduce((total, item) => total + item.quantity, 0);
 
     const shardsPerDrop =

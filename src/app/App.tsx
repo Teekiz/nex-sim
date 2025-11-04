@@ -1,9 +1,15 @@
 import './App.css'
-import SimulatorUI from "./components/SimulatorUI.tsx";
+import InputBox from "./components/Controls/InputBox.tsx";
+import ItemGridUI from "./components/Display/ItemGridUI.tsx";
+import ItemStats from "./components/Display/Stats.tsx";
 
 function App() {
   return (
-    SimulatorUI()
+      <>
+          <InputBox />
+          <ItemGridUI/>
+          <ItemStats/>
+      </>
   );
 }
 

@@ -1,4 +1,4 @@
-import {Tables} from "./enum/tables.tsx";
+import {Tables} from "../enum/tables.ts";
 
 export function rollTables(contribution: number, teamsize: number): Tables[]
 {

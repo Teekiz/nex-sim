@@ -1,11 +1,11 @@
-import type {ItemRow} from "../../../lib/types/itemRow.tsx";
 import {Container} from "@mui/material";
+import type {Item} from "../../../stores/itemStore.ts";
 
-export default function ItemContainer({item}: {item: ItemRow}) {
+export default function ItemContainer({item}: {item: Item}) {
     return (
         <Container>
             {item.quantity}
-            <img src={item.image_url} alt={item.name + " image"}></img>
+            <img src={item.imageUrl} alt={item.name + " image"}></img>
         </Container>
     );
 }
