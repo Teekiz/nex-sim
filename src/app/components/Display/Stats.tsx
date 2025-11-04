@@ -20,13 +20,22 @@ export default function ItemStats() {
     const dropRate = totalUniques / timesRolled; // decimal fraction
     const dropRateInverse = dropRate > 0 ? Math.round(1 / dropRate) : Infinity;
 
+    const currentDryStreak = useStatisticsStore().currentDryStreak;
+    const longestDryStreak = useStatisticsStore().longestDryStreak;
+
     return (
         <Container maxWidth="sm">
             Total uniques: {totalUniques}
-            <br />
+            <br/>
             Average shards per drop: {shardsPerDrop}
-            <br />
+            <br/>
             Actual drop rate: 1 in {dropRateInverse}
+            <br/>
+            <br/>
+            Current dry streak: {currentDryStreak}
+            <br/>
+            Longest dry streak: {longestDryStreak}
+            <br/>
         </Container>
     );
 }

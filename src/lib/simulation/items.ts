@@ -49,11 +49,12 @@ export function rollTableItems(targetTable: Tables, contribution: number): void{
 
                 if (item.table === Tables.UNIQUE){
                     resetDryStreak();
-                    addItemToItemLog(item.id);
+                    addItemToItemLog(item.id, item.name);
+                } else if (item.table === Tables.PET) {
+                    addItemToItemLog(item.id, item.name);
                 } else {
                     incrementDryStreak();
                 }
-
                 return;
             }
         }

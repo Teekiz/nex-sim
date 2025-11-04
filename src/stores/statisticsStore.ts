@@ -7,7 +7,7 @@ type statisticsStore = {
     itemLog: itemLog[];
 
     incrementTotalRolls: () => void;
-    addItemToItemLog: (id: number) => void;
+    addItemToItemLog: (id: number, name: string) => void;
     incrementDryStreak: () => void;
     resetDryStreak: () => void;
     resetStatistics: () => void;
@@ -15,6 +15,7 @@ type statisticsStore = {
 
 type itemLog = {
     id: number;
+    name: string
     rollCount: number;
 }
 
@@ -29,9 +30,9 @@ export const useStatisticsStore = create<statisticsStore>((set) => ({
             totalRolls: state.totalRolls + 1,
         })),
 
-    addItemToItemLog: (id: number) =>
+    addItemToItemLog: (id: number, name: string) =>
         set((state) => ({
-            itemLog: [...state.itemLog, { id, rollCount: state.totalRolls }],
+            itemLog: [...state.itemLog, { id, name, rollCount: state.totalRolls }],
         })),
 
     incrementDryStreak: () =>

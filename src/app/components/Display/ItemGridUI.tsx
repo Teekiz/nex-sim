@@ -11,10 +11,11 @@ export default function ItemGridUI() {
     return (
         <Container maxWidth="sm" className={"collection_container"}>
             Nex kills: {timesRolled}
+            <br/>
             <Grid container spacing={0} columns={6}>
                 {items.map((item) => (
                     <Grid key={item.id}>
-                        <ItemContainer item={item} />
+                        <ItemContainer item={item}/>
                     </Grid>
                 ))}
             </Grid>
