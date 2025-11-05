@@ -1,0 +1,16 @@
+import {type Item, useItemsStore} from "../../stores/itemStore.ts";
+
+function getItems(): Item[] {
+    return useItemsStore.getState().items;
+}
+
+export function getShardCount(): number {
+    const shards = getItems().find(item => item.id === 8);
+    return shards == undefined ? 0 : shards.quantity;
+}
+
+export function getUniqueCount(): number {
+    return getItems()
+        .filter(item => item.id >= 2 && item.id <= 7)
+        .reduce((total, item) => total + item.quantity, 0);
+}

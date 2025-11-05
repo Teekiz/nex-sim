@@ -1,21 +1,17 @@
 import {Container} from "@mui/material";
-import {useItemsStore} from "../../../stores/itemStore.ts";
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
+import {getShardCount, getUniqueCount} from "../../../lib/util/util.ts";
 
 export default function ItemStats() {
-    const items = useItemsStore(state => state.items);
+
     const timesRolled = useStatisticsStore().totalRolls;
-
-    const shards = items.find(item => item.id === 8);
-
-    const totalUniques = items
-        .filter(item => item.id >= 2 && item.id <= 7)
-        .reduce((total, item) => total + item.quantity, 0);
+    const totalUniques = getUniqueCount();
+    const totalShards = getShardCount();
 
     const shardsPerDrop =
         totalUniques > 1
-            ? Math.floor((shards?.quantity ?? 1) / totalUniques)
-            : shards?.quantity ?? 0;
+            ? Math.floor((totalShards ?? 1) / totalUniques)
+            : totalShards;
 
     const dropRate = totalUniques / timesRolled; // decimal fraction
     const dropRateInverse = dropRate > 0 ? Math.round(1 / dropRate) : Infinity;
