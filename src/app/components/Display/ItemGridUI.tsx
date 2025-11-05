@@ -1,16 +1,21 @@
 
-import type {ItemRow} from "../../../lib/types/itemRow.tsx";
 import {Container, Grid} from "@mui/material";
 import ItemContainer from "./ItemContainer.tsx";
+import {useItemsStore} from "../../../stores/itemStore.ts";
+import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 
-export default function ItemGridUI({items, timesRolled}: {items: ItemRow[], timesRolled: number}) {
+export default function ItemGridUI() {
+    const items = useItemsStore(state => state.items);
+    const timesRolled = useStatisticsStore().totalRolls;
+
     return (
         <Container maxWidth="sm" className={"collection_container"}>
             Nex kills: {timesRolled}
+            <br/>
             <Grid container spacing={0} columns={6}>
                 {items.map((item) => (
-                    <Grid>
-                        <ItemContainer item={item} />
+                    <Grid key={item.id}>
+                        <ItemContainer item={item}/>
                     </Grid>
                 ))}
             </Grid>
