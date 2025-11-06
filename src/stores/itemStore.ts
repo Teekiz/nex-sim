@@ -30,6 +30,7 @@ export type ItemSourceData = {
 interface ItemStore {
     items: Item[];
     updateQuantity: (itemID: number, quantity: number) => void;
+    resetQuantity: () => void;
 }
 
 export const useItemsStore = create<ItemStore>((set) => ({
@@ -54,4 +55,12 @@ export const useItemsStore = create<ItemStore>((set) => ({
                     : item
             ),
         })),
+
+    resetQuantity: () => {
+        set((state) => ({
+            items: state.items.map((item) => ({
+                ...item, quantity: 0
+            }))
+        }))
+    }
 }));

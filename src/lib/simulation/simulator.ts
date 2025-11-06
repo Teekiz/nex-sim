@@ -2,16 +2,36 @@ import {rollTableItems} from "./items.ts";
 
 import {rollTables} from "./tables.ts";
 import {useStatisticsStore} from "../../stores/statisticsStore.ts";
+import {Condition} from "../enum/conditions.ts";
+import React from "react";
+import {checkCondition} from "./conditions.ts";
 
-export function simulateDrops(rolls: number, teamsize: number, contribution: number)
+//A function which simulates the drops. It first rolls to check which tables should be rolled and then will roll until the given condition has been met.
+export function simulateDrops({hasSimulationAutoRollStartedRef}: {hasSimulationAutoRollStartedRef: React.RefObject<boolean>}, condition: Condition, teamsize: number, contribution: number, targetRolls?: number, targetIds?: number[])
 {
     const {incrementTotalRolls} = useStatisticsStore.getState();
 
-    while (rolls > 0) {
-        const tablesToRoll = rollTables(contribution, teamsize);
-
-        tablesToRoll.map(table => rollTableItems(table, contribution));
-        incrementTotalRolls();
-        rolls--;
+    //checks to ensure that the target information is provided before rolling the tables.
+    if ((condition === Condition.UNTIL_ROLL_COUNT || condition === Condition.UNTIL_SHARD_COUNT || condition === Condition.UNTIL_UNIQUE_COUNT) && targetRolls === undefined) {
+        return;
     }
+
+    if (condition === Condition.UNTIL_SELECTED_ITEMS && (targetIds === undefined || targetIds?.length === 0)) {
+        return;
+    }
+
+    let conditionMet = false;
+        function performRoll() {
+            conditionMet = checkCondition(condition, targetRolls, targetIds)
+            if (conditionMet || !hasSimulationAutoRollStartedRef.current) return;
+
+            const tablesToRoll = rollTables(contribution, teamsize);
+            tablesToRoll.map(table => rollTableItems(table, contribution));
+
+            incrementTotalRolls();
+            setTimeout(performRoll, 50);
+
+        }
+
+        performRoll();
 }
