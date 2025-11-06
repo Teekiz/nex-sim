@@ -7,6 +7,7 @@ import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 import {useItemsStore} from "../../../stores/itemStore.ts";
 import {Condition} from "../../../lib/enum/conditions.ts";
 import ItemsCheckbox from "./ItemsCheckbox.tsx";
+import {checkCondition} from "../../../lib/simulation/conditions.ts";
 
 export default function InputBox() {
 
@@ -14,34 +15,40 @@ export default function InputBox() {
     const [teamsize, setteamsize] = useState(3);
     const [rolls, setRolls] = useState(10);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
     const [condition, setCondition] = useState<Condition>(Condition.UNTIL_ROLL_COUNT);
+    const isConditionMet = checkCondition(condition, rolls, selectedItems);
 
     //these are used to stop and start the roll - controlled by the user
     const [hasSimulationAutoRollStarted, setHasSimulationAutoRollStarted] = useState(false);
     const hasSimulationAutoRollStartedRef = useRef(hasSimulationAutoRollStarted);
 
-
     const resetItemsQuantity = useItemsStore().resetQuantity;
     const resetStatistics = useStatisticsStore().resetStatistics;
 
     const handleRollClick = () => {
-        setHasSimulationAutoRollStarted(true);
-        hasSimulationAutoRollStartedRef.current = true;
+        setHasSimulationAutoRolledStarted(true);
         simulateDrops({hasSimulationAutoRollStartedRef}, condition, teamsize, contribution, rolls, selectedItems);
     }
 
     const handleCancelSim = () => {
-        setHasSimulationAutoRollStarted(false);
-        hasSimulationAutoRollStartedRef.current = false;
+        setHasSimulationAutoRolledStarted(false);
     }
 
     const handleConditionChange = (event: SelectChangeEvent) => {
         setCondition(event.target.value as Condition);
+        setHasSimulationAutoRolledStarted(false);
     };
 
     const handleResetClick = () => {
         resetItemsQuantity();
         resetStatistics();
+        handleCancelSim();
+    }
+
+    const setHasSimulationAutoRolledStarted = (value: boolean) => {
+        setHasSimulationAutoRollStarted(value);
+        hasSimulationAutoRollStartedRef.current = value;
     }
 
     const handleItemSelection = (itemID: number, checked: boolean) => {
@@ -85,11 +92,13 @@ export default function InputBox() {
                 />
             ) : null}
 
-            {!hasSimulationAutoRollStarted ? (
-                <Button variant="text" onClick={handleRollClick}>Generate Rolls</Button>
-            ) : (
-                <Button variant="text" onClick={handleCancelSim}>Cancel Rolls</Button>
-            )}
+            <Button
+                variant="text"
+                onClick={hasSimulationAutoRollStarted && !isConditionMet ? handleCancelSim : handleRollClick}
+                disabled={isConditionMet}
+            >
+                {hasSimulationAutoRollStarted && !isConditionMet ? "Cancel Rolls" : "Generate Rolls"}
+            </Button>
 
             <Button variant="text" onClick={handleResetClick}>Reset</Button>
         </Box>
