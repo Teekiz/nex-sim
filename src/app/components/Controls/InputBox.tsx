@@ -1,6 +1,6 @@
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {Button, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent} from "@mui/material";
 import {simulateDrops} from "../../../lib/simulation/simulator.ts";
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
@@ -16,19 +16,23 @@ export default function InputBox() {
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
     const [condition, setCondition] = useState<Condition>(Condition.UNTIL_ROLL_COUNT);
 
-    const [continueSimulation, setContinueSimulation] = useState(false);
-    //const [simulationCompleted, setSimulationCompleted] = useState(false);
+    //these are used to stop and start the roll - controlled by the user
+    const [hasSimulationAutoRollStarted, setHasSimulationAutoRollStarted] = useState(false);
+    const hasSimulationAutoRollStartedRef = useRef(hasSimulationAutoRollStarted);
+
 
     const resetItemsQuantity = useItemsStore().resetQuantity;
     const resetStatistics = useStatisticsStore().resetStatistics;
 
     const handleRollClick = () => {
-        setContinueSimulation(true);
-        simulateDrops({continueSimulation}, condition, teamsize, contribution, rolls, selectedItems);
+        setHasSimulationAutoRollStarted(true);
+        hasSimulationAutoRollStartedRef.current = true;
+        simulateDrops({hasSimulationAutoRollStartedRef}, condition, teamsize, contribution, rolls, selectedItems);
     }
 
     const handleCancelSim = () => {
-        setContinueSimulation(false);
+        setHasSimulationAutoRollStarted(false);
+        hasSimulationAutoRollStartedRef.current = false;
     }
 
     const handleConditionChange = (event: SelectChangeEvent) => {
@@ -81,7 +85,7 @@ export default function InputBox() {
                 />
             ) : null}
 
-            {!continueSimulation ? (
+            {!hasSimulationAutoRollStarted ? (
                 <Button variant="text" onClick={handleRollClick}>Generate Rolls</Button>
             ) : (
                 <Button variant="text" onClick={handleCancelSim}>Cancel Rolls</Button>

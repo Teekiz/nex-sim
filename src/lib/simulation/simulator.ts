@@ -6,9 +6,10 @@ import {getShardCount, getUniqueCount} from "../util/util.ts";
 import {useItemsStore} from "../../stores/itemStore.ts";
 import {Tables} from "../enum/tables.ts";
 import {Condition} from "../enum/conditions.ts";
+import React from "react";
 
 //A function which simulates the drops. It first rolls to check which tables should be rolled and then will roll until the given condition has been met.
-export function simulateDrops({continueSimulation}: {continueSimulation: boolean}, condition: Condition, teamsize: number, contribution: number, targetRolls?: number, targetIds?: number[], )
+export function simulateDrops({hasSimulationAutoRollStartedRef}: {hasSimulationAutoRollStartedRef: React.RefObject<boolean>}, condition: Condition, teamsize: number, contribution: number, targetRolls?: number, targetIds?: number[], )
 {
     const {incrementTotalRolls} = useStatisticsStore.getState();
 
@@ -46,7 +47,7 @@ export function simulateDrops({continueSimulation}: {continueSimulation: boolean
                     conditionMet = true;
             }
 
-            if (conditionMet || !continueSimulation) return;
+            if (conditionMet || !hasSimulationAutoRollStartedRef.current) return;
 
             const tablesToRoll = rollTables(contribution, teamsize);
             tablesToRoll.map(table => rollTableItems(table, contribution));
