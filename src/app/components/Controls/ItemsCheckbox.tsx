@@ -1,5 +1,4 @@
-import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel} from "@mui/material";
-import Box from "@mui/material/Box";
+import {Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid} from "@mui/material";
 import {useItemsStore} from "../../../stores/itemStore.ts";
 import {Tables} from "../../../lib/enum/tables.ts";
 
@@ -13,23 +12,25 @@ export default function ItemsCheckbox({selectedIds, handleSelected}: ItemCheckbo
     const selectableItems = useItemsStore.getState().items.filter(item => item.table === Tables.UNIQUE || item.table === Tables.PET);
 
     return (
-        <Box sx={{ display: 'flex' }}>
             <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
                 <FormLabel component="legend">Select items</FormLabel>
                 <FormGroup>
-                    {selectableItems.map((item) => (
-                        <FormControlLabel
-                            key={item.id}
-                            control={
-                                <Checkbox
-                                    checked={selectedIds.includes(item.id)}
-                                    onChange={(_, checked) => handleSelected(item.id, checked)} name="gilad" />
-                            }
-                            label={item.name}
-                        />
-                    ))}
+                    <Grid container spacing={2} columns={3} alignSelf={"center"}>
+                        {selectableItems.map((item) => (
+                            <Grid size={1} key={item.id}>
+                                <FormControlLabel
+                                    key={item.id}
+                                    control={
+                                        <Checkbox
+                                            checked={selectedIds.includes(item.id)}
+                                            onChange={(_, checked) => handleSelected(item.id, checked)} name="gilad" />
+                                    }
+                                    label={item.name}
+                                />
+                            </Grid>
+                        ))}
+                    </Grid>
                 </FormGroup>
             </FormControl>
-        </Box>
     );
 }

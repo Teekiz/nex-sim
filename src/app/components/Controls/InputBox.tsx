@@ -1,13 +1,23 @@
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import {useRef, useState} from "react";
-import {Button, FormControl, InputLabel, MenuItem, Select, type SelectChangeEvent} from "@mui/material";
+import {
+    Button,
+    Collapse,
+    Container,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Select,
+    type SelectChangeEvent,
+    Stack
+} from "@mui/material";
 import {simulateDrops} from "../../../lib/simulation/simulator.ts";
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 import {useItemsStore} from "../../../stores/itemStore.ts";
 import {Condition} from "../../../lib/enum/conditions.ts";
 import ItemsCheckbox from "./ItemsCheckbox.tsx";
 import {checkCondition} from "../../../lib/simulation/conditions.ts";
+import Box from "@mui/material/Box";
 
 export default function InputBox() {
 
@@ -58,49 +68,70 @@ export default function InputBox() {
     }
 
     return (
-        <Box
-            component="form"
-            sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-            noValidate
-            autoComplete="off"
-            >
-                <TextField id="outlined-basic" label="Contiribution" variant="outlined" value={contribution} onChange={(e) => setContribution(parseFloat(e.target.value))} type={"number"}/>
-                <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
-                <TextField id="outlined-basic" label="Number of rolls" variant="outlined" value={rolls} onChange={(e) => setRolls(Number(e.target.value))} type={"number"}/>
+        <Container maxWidth="md">
+            <Stack spacing={4} alignItems={"center"}>
 
-            <FormControl fullWidth>
-                <InputLabel id="condition-select-label">Condition</InputLabel>
-                <Select
-                    labelId="condition-select-label"
-                    id="condition-select"
-                    value={condition}
-                    label="Condition"
-                    onChange={handleConditionChange}
-                >
-                    {Object.entries(Condition).map(([key, value]) => (
-                        <MenuItem key={key} value={value}>
-                            {value}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+                {/* Contribution + Team Size (same row) */}
+                    <Stack direction={"row"} spacing={3} width={"100%"} justifyContent={"center"}>
+                            <TextField id="outlined-basic" label="Contiribution" variant="outlined" value={contribution} onChange={(e) => setContribution(parseFloat(e.target.value))} type={"number"}/>
+                            <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
+                    </Stack>
 
-            {condition === Condition.UNTIL_SELECTED_ITEMS ? (
-                <ItemsCheckbox
-                    handleSelected={handleItemSelection}
-                    selectedIds={selectedItems}
-                />
-            ) : null}
+                {/* Condition selection */}
+                <FormControl variant="filled" sx={{ minWidth: 250 }}>
+                    <InputLabel id="condition-select-label">Simulation Condition</InputLabel>
+                    <Select
+                        labelId="condition-select-label"
+                        id="condition-select"
+                        value={condition}
+                        onChange={handleConditionChange}
+                        variant="filled"
+                        sx={{ minWidth: 250 }}
+                    >
+                        {Object.entries(Condition).map(([key, value]) => (
+                            <MenuItem key={key} value={value}>
+                                {value}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
 
-            <Button
-                variant="text"
-                onClick={hasSimulationAutoRollStarted && !isConditionMet ? handleCancelSim : handleRollClick}
-                disabled={isConditionMet}
-            >
-                {hasSimulationAutoRollStarted && !isConditionMet ? "Cancel Rolls" : "Generate Rolls"}
-            </Button>
+                {/* Condition-specific inputs */}
+                <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
+                    condition === Condition.UNTIL_UNIQUE_COUNT ||
+                    condition === Condition.UNTIL_SHARD_COUNT}>
+                    <Box sx={{ mt: 2 }}>
+                        <TextField
+                            label="Number of Rolls"
+                            variant="outlined"
+                            value={rolls}
+                            onChange={(e) => setRolls(Number(e.target.value))}
+                            type="number"
+                        />
+                    </Box>
+                </Collapse>
 
-            <Button variant="text" onClick={handleResetClick}>Reset</Button>
-        </Box>
+                <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
+                    <Box sx={{ mt: 2 }}>
+                        <ItemsCheckbox
+                                handleSelected={handleItemSelection}
+                                selectedIds={selectedItems}
+                            />
+                    </Box>
+                </Collapse>
+
+                {/* Buttons */}
+                <Stack direction="row" spacing={3} justifyContent="center">
+                <Button
+                        variant="text"
+                        onClick={hasSimulationAutoRollStarted && !isConditionMet ? handleCancelSim : handleRollClick}
+                        disabled={isConditionMet}
+                    >
+                        {hasSimulationAutoRollStarted && !isConditionMet ? "Cancel Rolls" : "Generate Rolls"}
+                    </Button>
+                    <Button variant="text" onClick={handleResetClick}>Reset</Button>
+                </Stack>
+            </Stack>
+        </Container>
     );
 }
