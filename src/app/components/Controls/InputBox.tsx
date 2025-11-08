@@ -97,28 +97,32 @@ export default function InputBox() {
                 </FormControl>
 
                 {/* Condition-specific inputs */}
-                <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
-                    condition === Condition.UNTIL_UNIQUE_COUNT ||
-                    condition === Condition.UNTIL_SHARD_COUNT}>
-                    <Box sx={{ mt: 2 }}>
-                        <TextField
-                            label="Number of Rolls"
-                            variant="outlined"
-                            value={rolls}
-                            onChange={(e) => setRolls(Number(e.target.value))}
-                            type="number"
-                        />
-                    </Box>
-                </Collapse>
-
-                <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
-                    <Box sx={{ mt: 2 }}>
-                        <ItemsCheckbox
-                                handleSelected={handleItemSelection}
-                                selectedIds={selectedItems}
+                <Box sx={{ display: "contents" }}>
+                    <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
+                        condition === Condition.UNTIL_UNIQUE_COUNT ||
+                        condition === Condition.UNTIL_SHARD_COUNT}>
+                        <Box sx={{ mt: 2 }}>
+                            <TextField
+                                label="Number of Rolls"
+                                variant="outlined"
+                                value={rolls}
+                                onChange={(e) => setRolls(Number(e.target.value))}
+                                type="number"
                             />
-                    </Box>
-                </Collapse>
+                        </Box>
+                    </Collapse>
+                </Box>
+
+                <Box sx={{ display: "contents" }}>
+                    <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
+                        <Box sx={{ mt: 2 }}>
+                            <ItemsCheckbox
+                                    handleSelected={handleItemSelection}
+                                    selectedIds={selectedItems}
+                                />
+                        </Box>
+                    </Collapse>
+                </Box>
 
                 {/* Buttons */}
                 <Stack direction="row" spacing={3} justifyContent="center">
