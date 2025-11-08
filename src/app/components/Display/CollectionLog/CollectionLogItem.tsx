@@ -1,7 +1,7 @@
 import {Container} from "@mui/material";
-import type {Item} from "../../../stores/itemStore.ts";
+import type {Item} from "../../../../stores/itemStore.ts";
 
-export default function ItemContainer({item}: {item: Item}) {
+export default function CollectionLogItem({item}: {item: Item}) {
     return (
         <Container>
             {item.quantity}

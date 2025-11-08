@@ -1,4 +1,4 @@
-import ItemGridUI from "./ItemGridUI.tsx";
+import CollectionLog from "./CollectionLog/CollectionLog.tsx";
 import ItemStats from "./Stats.tsx";
 import ItemsReceivedModal from "./ItemsList/ItemsReceivedModal.tsx";
 import MostRecentItemBox from "./ItemsList/MostRecentItemBox.tsx";
@@ -11,7 +11,7 @@ export default function DisplayContainer(){
 
     return (
         <>
-            <ItemGridUI/>
+            <CollectionLog/>
             <ItemStats/>
             <MostRecentItemBox handleOpen={handleOpen} />
             <ItemsReceivedModal open={open} handleClose={handleClose} />

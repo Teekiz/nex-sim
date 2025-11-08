@@ -14,3 +14,9 @@ export function getUniqueCount(): number {
         .filter(item => item.id >= 2 && item.id <= 7)
         .reduce((total, item) => total + item.quantity, 0);
 }
+
+export function getCollectionLogCount(): number {
+    return getItems()
+        .filter(item => item.quantity >= 1)
+        .length;
+}
