@@ -53,6 +53,34 @@
     margin: 2px 0;
 }
 
+.collection_log_item_box {
+    font-family: 'RunescapePlain', serif;
+    color: #ff981f;
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+    margin-top: 5px ;
+}
+
+.collection_log_item_box_quantity {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: 'RunescapePlain', serif;
+    font-size: 14px;
+    color: #f6f600;
+    text-shadow: 1px 1px 2px #000;
+    pointer-events: none;
+    line-height: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    white-space: nowrap;
+}
+
+.image_greyed_out {
+    filter: opacity(90%) contrast(75%);
+}
+
 .text_white {
     color: #ffffff;
 }

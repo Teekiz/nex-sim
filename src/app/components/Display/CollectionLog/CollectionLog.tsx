@@ -28,9 +28,9 @@ export default function CollectionLog() {
             <Divider className={"collection_log_divider"} />
 
             <Box className={"collection_log_inner_box"}>
-                <Grid container spacing={0} columns={6}>
+                <Grid container spacing={1} columns={6}>
                     {items.map((item) => (
-                        <Grid key={item.id}>
+                        <Grid key={item.id} size={1}>
                             <CollectionLogItem item={item}/>
                         </Grid>
                     ))}
