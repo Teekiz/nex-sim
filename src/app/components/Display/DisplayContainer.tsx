@@ -1,8 +1,8 @@
 import CollectionLog from "./CollectionLog/CollectionLog.tsx";
 import ItemStats from "./Stats.tsx";
-import ItemsReceivedModal from "./ItemsList/ItemsReceivedModal.tsx";
-import MostRecentItemBox from "./ItemsList/MostRecentItemBox.tsx";
+import ItemsLogModal from "./ItemsList/ItemsLogModal.tsx";
 import React from "react";
+import {Stack} from "@mui/material";
 
 export default function DisplayContainer(){
     const [open, setOpen] = React.useState(false);
@@ -10,11 +10,10 @@ export default function DisplayContainer(){
     const handleClose = () => setOpen(false);
 
     return (
-        <>
-            <CollectionLog/>
+        <Stack direction="column">
+            <CollectionLog handleOpen={handleOpen}/>
             <ItemStats/>
-            <MostRecentItemBox handleOpen={handleOpen} />
-            <ItemsReceivedModal open={open} handleClose={handleClose} />
-        </>
+            <ItemsLogModal open={open} handleClose={handleClose} />
+        </Stack>
     );
 }
