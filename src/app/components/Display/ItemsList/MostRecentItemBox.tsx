@@ -23,20 +23,18 @@ export default function MostRecentItemBox({ handleOpen }: ModalOpenProps) {
             onClick={handleOpen}
         >
             <Box sx={({width: "98%", maxWidth: "inherit"})} className={"collection_log_box"}>
-                <Box className={"collection_log_inner_box"}>
-                    <b>Latest item received</b>
-                    <p>Received at: <span className={"text_white"}>{latestItem !== undefined ? latestItem.rollCount + " kill count" : "Not yet received"}</span></p>
-                </Box>
-
-                <Divider className={"collection_log_divider"}/>
-
-
                 <Box sx={{height: "32px"}} className={"collection_log_inner_box"}>
                     <Box margin={"4px"}>
                     {latestItem !== undefined ? (
                         <ItemImage name={latestItem.name} imageUrl={getImageUrl(latestItem.id)} isGreyedOut={false} />
                     ) : ("")}
                     </Box>
+                </Box>
+
+                <Divider className={"collection_log_divider"}/>
+
+                <Box className={"collection_log_inner_box"}>
+                    <p>Received at: <span className={"text_white"}>{latestItem !== undefined ? latestItem.rollCount + " kill count" : ""}</span></p>
                 </Box>
             </Box>
         </animated.div>
