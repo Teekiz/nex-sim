@@ -20,3 +20,8 @@ export function getCollectionLogCount(): number {
         .filter(item => item.quantity >= 1)
         .length;
 }
+
+export function getImageUrl(itemID: number): string {
+    const item = getItems().find(item => item.id === itemID);
+    return item === undefined ? "" : item.imageUrl;
+}
