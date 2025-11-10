@@ -1,6 +1,7 @@
-import {Container} from "@mui/material";
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 import {getShardCount, getUniqueCount} from "../../../lib/util/util.ts";
+import Box from "@mui/material/Box";
+import {Stack} from "@mui/material";
 
 export default function ItemStats() {
 
@@ -20,18 +21,39 @@ export default function ItemStats() {
     const longestDryStreak = useStatisticsStore().longestDryStreak;
 
     return (
-        <Container maxWidth="sm">
-            Total uniques: {totalUniques}
-            <br/>
-            Average shards per drop: {shardsPerDrop}
-            <br/>
-            Actual drop rate: 1 in {dropRateInverse}
-            <br/>
-            <br/>
-            Current dry streak: {currentDryStreak}
-            <br/>
-            Longest dry streak: {longestDryStreak}
-            <br/>
-        </Container>
+        <Box display={"flex"} flexDirection="column" alignItems="center" gap={1.5}>
+            <Stack direction={"row"} alignItems={"center"} spacing={1}>
+                <Box className={"collection_log_box"}>
+                    <Box className={"collection_log_inner_box"} sx={{width: "100px"}}>
+                        <p>Total uniques: <span className={"text_white"}>{totalUniques}</span></p>
+                    </Box>
+                </Box>
+            </Stack>
+            <Stack direction={"row"} alignItems={"center"} spacing={2}>
+                <Box className={"collection_log_box"}>
+                    <Box className={"collection_log_inner_box"} sx={{width: "150px"}}>
+                        <p>Current dry streak: <span className={"text_white"}>{currentDryStreak}</span></p>
+                    </Box>
+                </Box>
+                <Box className={"collection_log_box"}>
+                <Box className={"collection_log_inner_box"} sx={{width: "150px"}}>
+                        <p>Longest dry streak: <span className={"text_white"}>{longestDryStreak}</span></p>
+                    </Box>
+                </Box>
+            </Stack>
+
+            <Stack direction={"row"} alignItems={"center"} spacing={2}>
+                <Box className={"collection_log_box"}>
+                    <Box className={"collection_log_inner_box"} sx={{width: "185px"}}>
+                        <p>Average shards per drop: <span className={"text_white"}>{shardsPerDrop}</span></p>
+                    </Box>
+                </Box>
+                <Box className={"collection_log_box"}>
+                    <Box className={"collection_log_inner_box"} sx={{width: "185px"}}>
+                        <p>Actual drop rate: <span className={"text_white"}>1 in {dropRateInverse}</span></p>
+                    </Box>
+                </Box>
+            </Stack>
+        </Box>
     );
 }

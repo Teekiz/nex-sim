@@ -11,7 +11,7 @@ export function getShardCount(): number {
 
 export function getUniqueCount(): number {
     return getItems()
-        .filter(item => item.id >= 2 && item.id <= 7)
+        .filter(item => item.id <= 7)
         .reduce((total, item) => total + item.quantity, 0);
 }
 
