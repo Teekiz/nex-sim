@@ -1,20 +1,10 @@
-@font-face {
-    font-family: 'RunescapePlain';
-    src: url('../assets/Fonts/RuneScape-Plain-12.ttf') format('truetype');
-}
-
-@font-face {
-    font-family: 'RunescapeBold';
-    src: url('../assets/Fonts/RuneScape-Bold-12.ttf') format('truetype');
-}
-
 :root {
     font-family: 'RunescapePlain', serif;
     line-height: 1.5;
     font-weight: 400;
 
     color-scheme: light dark;
-    color: rgba(0, 0, 0, 0.87);
+    color: rgba(255, 255, 255, 0.87);
     background: radial-gradient(circle at center, #3a0055, #0a0010 70%);
 
 
@@ -23,4 +13,3 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-

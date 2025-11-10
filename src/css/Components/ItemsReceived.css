@@ -1,0 +1,48 @@
+.items_received_modal {
+    background-color: #585040;
+    font-family: 'RunescapePlain', serif;
+    color: #b4ae1c;
+    padding: 4px;
+    border-radius: 6px;
+    max-width: 450px;
+    margin: 40px auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+    overflow-y: auto;
+    max-height: 50vh;
+    min-height: 50vh;
+}
+
+.items_received_modal_title_box {
+    background-color: #483e33;
+    padding: 4px 8px;
+    border-radius: 2px;
+}
+
+.items_received_modal_title {
+    font-family: 'RunescapeBold', serif;
+    font-size: 1rem;
+    color: #ff981f;
+    margin: 0;
+    text-align: center;
+}
+
+.items_received_modal_divider {
+    background-color: #3a3229;
+    height: 2px;
+    margin: 5px;
+}
+
+.items_received_modal_box {
+    background-color: #483e33;
+    padding: 4px 8px;
+    border-radius: 2px;
+    min-height: 45vh;
+    overflow-y: auto;
+}
+
+.items_received_modal_item {
+    padding: 2px 0;
+    line-height: 1.2;
+    font-size: 0.9rem;
+    text-align: center;
+}
