@@ -1,42 +1,27 @@
 import {useStatisticsStore} from "../../../../stores/statisticsStore.ts";
-import {animated, useSpring} from "@react-spring/web";
 import Box from "@mui/material/Box";
-import ItemImage from "../Shared/ItemImage.tsx";
-import {getImageUrl} from "../../../../lib/util/util.ts";
 import {Divider} from "@mui/material";
+import ItemLogItem from "./ItemsLogItem.tsx";
 
-interface ModalOpenProps {
-    handleOpen: () => void;
-}
 
-export default function MostRecentItemBox({ handleOpen }: ModalOpenProps) {
-
-    const [springProps, set] = useSpring(() => ({ transform: 'scale(1)' }));
+export default function MostRecentItemBox() {
     const itemLog = useStatisticsStore((state) => state.itemLog);
-    const latestItem = itemLog.at(itemLog.length - 1);
 
     return (
-        <animated.div
-            style={springProps}
-            onMouseEnter={() => set.start({transform: 'scale(1.05)'})}
-            onMouseLeave={() => set.start({transform: 'scale(1)'})}
-            onClick={handleOpen}
-        >
-            <Box sx={({width: "98%", maxWidth: "inherit"})} className={"collection_log_box"}>
-                <Box sx={{height: "32px"}} className={"collection_log_inner_box"}>
-                    <Box margin={"4px"}>
-                    {latestItem !== undefined ? (
-                        <ItemImage name={latestItem.name} imageUrl={getImageUrl(latestItem.id)} isGreyedOut={false} />
-                    ) : ("")}
+        <Box className="collection_log_box">
+            <Box className="collection_log_inner_box">
+                <p>Latest drops:</p>
+            </Box>
+            <Divider className="collection_log_divider" />
+            <Box className="item_log_inner_box">
+                <Box className="item_log_scroll_box" >
+                    <Box className={"item_log_inner"}>
+                    {itemLog.map((item) => (
+                        <ItemLogItem key={item.id} item={item} />
+                    ))}
                     </Box>
                 </Box>
-
-                <Divider className={"collection_log_divider"}/>
-
-                <Box className={"collection_log_inner_box"}>
-                    <p>Received at: <span className={"text_white"}>{latestItem !== undefined ? latestItem.rollCount + " kill count" : ""}</span></p>
-                </Box>
             </Box>
-        </animated.div>
+        </Box>
     );
 }

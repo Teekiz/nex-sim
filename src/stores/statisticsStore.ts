@@ -4,7 +4,7 @@ type statisticsStore = {
     totalRolls: number;
     longestDryStreak: number;
     currentDryStreak: number;
-    itemLog: itemLog[];
+    itemLog: ItemLog[];
 
     incrementTotalRolls: () => void;
     addItemToItemLog: (id: number, name: string) => void;
@@ -13,7 +13,7 @@ type statisticsStore = {
     resetStatistics: () => void;
 }
 
-type itemLog = {
+export type ItemLog = {
     id: number;
     name: string
     rollCount: number;

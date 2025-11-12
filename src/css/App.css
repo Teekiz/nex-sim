@@ -32,3 +32,8 @@
     gap: 16px;
     min-width: 400px;
 }
+
+.display_box {
+    max-width: 425px;
+    display: inline-block;
+}
