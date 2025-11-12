@@ -13,11 +13,12 @@ export default function MostRecentItemBox() {
                 <p>Latest drops:</p>
             </Box>
             <Divider className="collection_log_divider" />
+
             <Box className="item_log_inner_box">
                 <Box className="item_log_scroll_box" >
                     <Box className={"item_log_inner"}>
-                    {itemLog.map((item) => (
-                        <ItemLogItem key={item.id} item={item} />
+                    {itemLog.map((item, index) => (
+                        <ItemLogItem key={index} item={item} />
                     ))}
                     </Box>
                 </Box>
