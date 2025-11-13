@@ -18,13 +18,16 @@ import {Condition} from "../../../lib/enum/conditions.ts";
 import ItemsCheckbox from "./ItemsCheckbox.tsx";
 import {checkCondition} from "../../../lib/simulation/conditions.ts";
 import Box from "@mui/material/Box";
+import ContributionInput from "./ContributionInput.tsx";
 
 export default function InputBox() {
 
-    const [contribution, setContribution] = useState(0.33);
+    const [contributionRange, setContributionRange] = useState<number[]>([33.3, 40.0]);
     const [teamsize, setteamsize] = useState(3);
     const [rolls, setRolls] = useState(10);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
+
 
     const [condition, setCondition] = useState<Condition>(Condition.UNTIL_ROLL_COUNT);
     const isConditionMet = checkCondition(condition, rolls, selectedItems);
@@ -38,7 +41,7 @@ export default function InputBox() {
 
     const handleRollClick = () => {
         setHasSimulationAutoRolledStarted(true);
-        simulateDrops({hasSimulationAutoRollStartedRef}, condition, teamsize, contribution, rolls, selectedItems);
+        simulateDrops({hasSimulationAutoRollStartedRef}, condition, teamsize, contributionRange, rolls, selectedItems);
     }
 
     const handleCancelSim = () => {
@@ -71,30 +74,32 @@ export default function InputBox() {
         <Container maxWidth="md">
             <Stack spacing={4} alignItems={"center"}>
 
+                <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
+
                 {/* Contribution + Team Size (same row) */}
                     <Stack direction={"row"} spacing={3} width={"100%"} justifyContent={"center"}>
-                            <TextField id="outlined-basic" label="Contiribution" variant="outlined" value={contribution} onChange={(e) => setContribution(parseFloat(e.target.value))} type={"number"}/>
-                            <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
+                        <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
+                        <FormControl variant="filled" sx={{ minWidth: 225 }}>
+                            <InputLabel id="condition-select-label">Simulation Condition</InputLabel>
+                            <Select
+                                labelId="condition-select-label"
+                                id="condition-select"
+                                value={condition}
+                                onChange={handleConditionChange}
+                                variant="filled"
+                                sx={{ minWidth: 225 }}
+                            >
+                                {Object.entries(Condition).map(([key, value]) => (
+                                    <MenuItem key={key} value={value}>
+                                        {value}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
                     </Stack>
 
                 {/* Condition selection */}
-                <FormControl variant="filled" sx={{ minWidth: 250 }}>
-                    <InputLabel id="condition-select-label">Simulation Condition</InputLabel>
-                    <Select
-                        labelId="condition-select-label"
-                        id="condition-select"
-                        value={condition}
-                        onChange={handleConditionChange}
-                        variant="filled"
-                        sx={{ minWidth: 250 }}
-                    >
-                        {Object.entries(Condition).map(([key, value]) => (
-                            <MenuItem key={key} value={value}>
-                                {value}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
+
 
                 {/* Condition-specific inputs */}
                 <Box sx={{ display: "contents" }}>

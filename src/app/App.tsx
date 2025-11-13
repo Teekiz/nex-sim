@@ -1,7 +1,7 @@
 import '../css/App.css'
 import '../css/Fonts.css'
-import '../css/Components/CollectionLog.css'
-import '../css/Components/ItemLog.css'
+import './components/Display/CollectionLog/CollectionLog.css'
+import './components/Display/ItemsList/ItemLog.css'
 import InputBox from "./components/Controls/InputBox.tsx";
 import DisplayContainer from "./components/Display/DisplayContainer.tsx";
 import Box from "@mui/material/Box";

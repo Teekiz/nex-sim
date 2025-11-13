@@ -1,10 +1,10 @@
 import {useStatisticsStore} from "../../../../stores/statisticsStore.ts";
 import Box from "@mui/material/Box";
 import {Divider} from "@mui/material";
-import ItemLogItem from "./ItemsLogItem.tsx";
+import ItemLogItem from "./ItemsReceived.tsx";
 
 
-export default function MostRecentItemBox() {
+export default function ItemLog() {
     const itemLog = useStatisticsStore((state) => state.itemLog);
 
     return (
