@@ -1,6 +1,8 @@
 @font-face {
     font-family: 'RunescapePlain';
     src: url('../assets/Fonts/RuneScape-Plain-12.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
 }
 
 @font-face {
