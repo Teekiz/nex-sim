@@ -2,7 +2,7 @@ import '../css/App.css'
 import '../css/Fonts.css'
 import './components/Display/CollectionLog/CollectionLog.css'
 import './components/Display/ItemsList/ItemLog.css'
-import InputBox from "./components/Controls/InputBox.tsx";
+import InputBox from "./components/controls/InputBox.tsx";
 import DisplayContainer from "./components/Display/DisplayContainer.tsx";
 import Box from "@mui/material/Box";
 import TitleBox from "./components/Display/Title/TitleBox.tsx";
@@ -13,13 +13,13 @@ function App() {
     const theme = createTheme({
         palette: {
             text: {
+                secondary: "#ffffff",
                 primary: "#ffffff",
-                secondary: "#fff500"
             }
         },
         typography: {
             fontFamily: 'RunescapePlain',
-            fontSize: 18
+            fontSize: 16
         },
         components: {
             MuiOutlinedInput: {
@@ -40,10 +40,24 @@ function App() {
             MuiInputLabel: {
                 styleOverrides: {
                     root: {
+                        fontFamily: 'RunescapeBold',
+                        fontSize: 18,
                         color: "white",
                     },
                 },
             },
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        fontFamily: 'RunescapeBold',
+                        fontSize: 16,
+                        border: "1px solid white",
+                        width: "100%",
+                        height: "100%",
+                        color: "white",
+                    }
+                }
+            }
         },
     });
 

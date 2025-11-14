@@ -29,7 +29,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
     }
 
     return (
-        <Box sx={{ width: 300, backgroundColor: "transparent" }}>
+        <Box sx={{ width: 425, backgroundColor: "transparent", border: "1px solid white", borderRadius: "4px", padding: "20px", marginTop: "10px", }}>
             <InputLabel sx={{float: "none", textAlign: "center"}}>Contribution (%)</InputLabel>
             <div style={{float: "left"}}>
                 <InputLabel>Min</InputLabel>
@@ -52,7 +52,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                 <Input
                     value={contribution[1]}
                     size="small"
-                    onChange={(event) => updateContributionNumber(Number(event.target.value), 0)}
+                    onChange={(event) => updateContributionNumber(Number(event.target.value), 1)}
                     inputProps={{
                         min: 0,
                         max: 100,

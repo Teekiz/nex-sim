@@ -2,12 +2,7 @@ import TextField from '@mui/material/TextField';
 import {useRef, useState} from "react";
 import {
     Button,
-    Collapse,
     Container,
-    FormControl,
-    InputLabel,
-    MenuItem,
-    Select,
     type SelectChangeEvent,
     Stack
 } from "@mui/material";
@@ -15,10 +10,10 @@ import {simulateDrops} from "../../../lib/simulation/simulator.ts";
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 import {useItemsStore} from "../../../stores/itemStore.ts";
 import {Condition} from "../../../lib/enum/conditions.ts";
-import ItemsCheckbox from "./ItemsCheckbox.tsx";
 import {checkCondition} from "../../../lib/simulation/conditions.ts";
-import Box from "@mui/material/Box";
 import ContributionInput from "./ContributionInput.tsx";
+import ConditionInput from "./condition_controls/ConditionInput.tsx";
+import CollapseComponents from "./condition_controls/CollapseComponents.tsx";
 
 export default function InputBox() {
 
@@ -26,8 +21,6 @@ export default function InputBox() {
     const [teamsize, setteamsize] = useState(3);
     const [rolls, setRolls] = useState(10);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
-
-
 
     const [condition, setCondition] = useState<Condition>(Condition.UNTIL_ROLL_COUNT);
     const isConditionMet = checkCondition(condition, rolls, selectedItems);
@@ -70,6 +63,10 @@ export default function InputBox() {
         );
     }
 
+    const isButtonConditionMet = (): boolean => {
+        return hasSimulationAutoRollStarted && !isConditionMet;
+    }
+
     return (
         <Container maxWidth="md">
             <Stack spacing={4} alignItems={"center"}>
@@ -79,66 +76,23 @@ export default function InputBox() {
                 {/* Contribution + Team Size (same row) */}
                     <Stack direction={"row"} spacing={3} width={"100%"} justifyContent={"center"}>
                         <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
-                        <FormControl variant="filled" sx={{ minWidth: 225 }}>
-                            <InputLabel id="condition-select-label">Simulation Condition</InputLabel>
-                            <Select
-                                labelId="condition-select-label"
-                                id="condition-select"
-                                value={condition}
-                                onChange={handleConditionChange}
-                                variant="filled"
-                                sx={{ minWidth: 225 }}
-                            >
-                                {Object.entries(Condition).map(([key, value]) => (
-                                    <MenuItem key={key} value={value}>
-                                        {value}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                        <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
                     </Stack>
 
-                {/* Condition selection */}
-
-
                 {/* Condition-specific inputs */}
-                <Box sx={{ display: "contents" }}>
-                    <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
-                        condition === Condition.UNTIL_UNIQUE_COUNT ||
-                        condition === Condition.UNTIL_SHARD_COUNT}>
-                        <Box sx={{ mt: 2 }}>
-                            <TextField
-                                label="Number of Rolls"
-                                variant="outlined"
-                                value={rolls}
-                                onChange={(e) => setRolls(Number(e.target.value))}
-                                type="number"
-                            />
-                        </Box>
-                    </Collapse>
-                </Box>
-
-                <Box sx={{ display: "contents" }}>
-                    <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
-                        <Box sx={{ mt: 2 }}>
-                            <ItemsCheckbox
-                                    handleSelected={handleItemSelection}
-                                    selectedIds={selectedItems}
-                                />
-                        </Box>
-                    </Collapse>
-                </Box>
+                <CollapseComponents selectedItems={selectedItems} handleItemSelection={handleItemSelection} condition={condition} rolls={rolls} setRolls={setRolls}></CollapseComponents>
 
                 {/* Buttons */}
-                <Stack direction="row" spacing={3} justifyContent="center">
+                <Stack direction="row" spacing={2} justifyContent="center" width={400}>
                 <Button
                         variant="text"
-                        onClick={hasSimulationAutoRollStarted && !isConditionMet ? handleCancelSim : handleRollClick}
+                        onClick={isButtonConditionMet() ? handleCancelSim : handleRollClick}
                         disabled={isConditionMet}
+                        sx={{backgroundColor: isButtonConditionMet() ? "red" : "forestgreen"}}
                     >
-                        {hasSimulationAutoRollStarted && !isConditionMet ? "Cancel Rolls" : "Generate Rolls"}
+                        {isButtonConditionMet() ? "Cancel Rolls" : "Generate Rolls"}
                     </Button>
-                    <Button variant="text" onClick={handleResetClick}>Reset</Button>
+                    <Button variant="text" onClick={handleResetClick} sx={{backgroundColor: "#FFA500"}}>Reset</Button>
                 </Stack>
             </Stack>
         </Container>

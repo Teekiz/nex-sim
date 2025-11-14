@@ -11,11 +11,12 @@ export default function ItemsCheckbox({selectedIds, handleSelected}: ItemCheckbo
 
     const selectableItems = useItemsStore.getState().items.filter(item => item.table === Tables.UNIQUE || item.table === Tables.PET);
 
+    //todo - make the dropdown hidable
     return (
             <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
                 <FormLabel component="legend">Select items</FormLabel>
                 <FormGroup>
-                    <Grid container spacing={2} columns={3} alignSelf={"center"}>
+                    <Grid container spacing={1} columns={3} alignSelf={"center"} sx={{border: "1px solid white", borderRadius: "4px", padding: "20px", marginTop: "10px"}}>
                         {selectableItems.map((item) => (
                             <Grid size={1} key={item.id}>
                                 <FormControlLabel
