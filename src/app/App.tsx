@@ -37,12 +37,34 @@ function App() {
                     },
                 },
             },
+            MuiFilledInput: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: "transparent",
+
+                        "&:before": {
+                            borderBottom: "1px solid white",
+                        },
+
+                        "&:hover:not(.Mui-disabled):before": {
+                            borderBottom: "1px solid white",
+                        },
+
+                        "&:after": {
+                            borderBottom: "2px solid white",
+                        },
+                    }
+                }
+            },
             MuiInputLabel: {
                 styleOverrides: {
                     root: {
                         fontFamily: 'RunescapeBold',
                         fontSize: 18,
                         color: "white",
+                        "&.Mui-focused": {
+                            color: "yellow",
+                        }
                     },
                 },
             },

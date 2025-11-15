@@ -21,7 +21,7 @@ export default function CollapseComponents({condition, rolls, setRolls, selected
                 <Box sx={{mt: 2}}>
                     <TextField
                         label="Number of Rolls"
-                        variant="outlined"
+                        variant="filled"
                         value={rolls}
                         onChange={(e) => setRolls(Number(e.target.value))}
                         type="number"/>

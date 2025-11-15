@@ -1,5 +1,6 @@
-import {Input, InputLabel, Slider} from "@mui/material";
+import {InputLabel, Slider} from "@mui/material";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 interface ContributionInputProps {
     contribution: number[];
@@ -29,37 +30,53 @@ export default function ContributionInput({contribution, setContribution}: Contr
     }
 
     return (
-        <Box sx={{ width: 425, backgroundColor: "transparent", border: "1px solid white", borderRadius: "4px", padding: "20px", marginTop: "10px", }}>
-            <InputLabel sx={{float: "none", textAlign: "center"}}>Contribution (%)</InputLabel>
+        <Box sx={{ width: 425, backgroundColor: "transparent"}}>
+            <InputLabel sx={{float: "none", textAlign: "center", fontSize: "14px"}}>Contribution (%)</InputLabel>
             <div style={{float: "left"}}>
-                <InputLabel>Min</InputLabel>
-                <Input
+                <TextField
                     value={contribution[0]}
+                    label="Min"
                     size="small"
+                    type={"text"}
+                    inputMode={"decimal"}
+                    variant={"filled"}
                     onChange={(event) => updateContributionNumber(Number(event.target.value), 0)}
-                    inputProps={{
-                        min: 0,
-                        max: 100,
-                        step: 0.1,
-                        type: 'number',
-                        'aria-labelledby': 'input-slider',
+                    slotProps={{
+                        input: {
+                            inputProps: {
+                                min: 0,
+                                max: 100,
+                                step: 0.1,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                            },
+                        },
                     }}
+                    sx={{mt: "-12px"}}
                 />
             </div>
 
             <div style={{float: "right"}}>
-                <InputLabel>Max</InputLabel>
-                <Input
+                <TextField
                     value={contribution[1]}
+                    label={"Max"}
                     size="small"
+                    type={"text"}
+                    inputMode={"decimal"}
+                    variant={"filled"}
                     onChange={(event) => updateContributionNumber(Number(event.target.value), 1)}
-                    inputProps={{
-                        min: 0,
-                        max: 100,
-                        step: 0.1,
-                        type: 'number',
-                        'aria-labelledby': 'input-slider',
+                    slotProps={{
+                        input: {
+                            inputProps: {
+                                min: 0,
+                                max: 100,
+                                step: 0.1,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                            },
+                        },
                     }}
+                    sx={{mt: "-12px"}}
                 />
             </div>
             <Slider

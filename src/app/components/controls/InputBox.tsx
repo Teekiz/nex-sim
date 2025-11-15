@@ -69,15 +69,13 @@ export default function InputBox() {
 
     return (
         <Container maxWidth="md">
-            <Stack spacing={4} alignItems={"center"}>
-
-                <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
-
+            <Stack spacing={4} alignItems={"center"} alignContent={"flex-end"}>
                 {/* Contribution + Team Size (same row) */}
-                    <Stack direction={"row"} spacing={3} width={"100%"} justifyContent={"center"}>
-                        <TextField id="outlined-basic" label="Team size" variant="outlined" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"number"}/>
-                        <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
-                    </Stack>
+                <Stack direction={"row"} spacing={3} width={"100%"} justifyContent={"center"}>
+                    <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
+                    <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
+                    <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
+                </Stack>
 
                 {/* Condition-specific inputs */}
                 <CollapseComponents selectedItems={selectedItems} handleItemSelection={handleItemSelection} condition={condition} rolls={rolls} setRolls={setRolls}></CollapseComponents>
