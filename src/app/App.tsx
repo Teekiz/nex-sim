@@ -72,6 +72,13 @@ function App() {
                     }
                 }
             },
+            MuiMenu: {
+                styleOverrides: {
+                    paper: {
+                        backgroundColor: "#640393",
+                    }
+                }
+            },
             MuiStack: {
                 styleOverrides: {
                     root: {

@@ -30,7 +30,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
     }
 
     return (
-        <Box sx={{backgroundColor: "transparent"}}>
+        <Box sx={{backgroundColor: "transparent", minWidth: "100%"}}>
             <InputLabel sx={{float: "none", textAlign: "center", fontSize: "14px"}}>Contribution (%)</InputLabel>
             <Box style={{float: "left"}}>
                 <TextField

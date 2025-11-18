@@ -68,16 +68,19 @@ export default function InputBox() {
     }
 
     return (
-            <Stack spacing={3} alignItems={"center"} alignContent={"flex-end"}>
-                {/* Contribution + Team Size (same row) */}
+            <Stack spacing={1} rowGap={1} alignItems={"center"} alignContent={"flex-end"}>
                 <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
-                    <Grid className={"input_wrapper_1"} sx={{width: 140}}>
-                        <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
-                    </Grid>
-                    <Grid className={"input_wrapper_2"} sx={{width: 500}}>
+                    <Grid sx={{width: 500}}>
                         <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
                     </Grid>
-                    <Grid className={"input_wrapper_3"} sx={{width: 140}}>
+                </Grid>
+
+                <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
+                    <Grid sx={{width: 140}}>
+                        <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
+                    </Grid>
+
+                    <Grid sx={{width: 140}}>
                         <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
                     </Grid>
                 </Grid>
