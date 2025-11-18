@@ -78,6 +78,13 @@ function App() {
                         marginLeft: 0,
                     }
                 }
+            },
+            MuiFormControl: {
+                styleOverrides: {
+                    root:{
+                        width: "100%",
+                    }
+                }
             }
         },
     });
