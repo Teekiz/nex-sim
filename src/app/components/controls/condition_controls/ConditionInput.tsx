@@ -8,7 +8,7 @@ interface ConditionInputProps {
 
 export default function ConditionInput({condition, handleConditionChange}: ConditionInputProps) {
     return (
-        <FormControl variant="filled" sx={{ minWidth: 225 }}>
+        <FormControl variant="filled">
             <InputLabel id="condition-select-label">Simulation Condition</InputLabel>
             <Select
                 labelId="condition-select-label"
@@ -16,7 +16,6 @@ export default function ConditionInput({condition, handleConditionChange}: Condi
                 value={condition}
                 onChange={handleConditionChange}
                 variant="filled"
-                sx={{ minWidth: 225 }}
             >
                 {Object.entries(Condition).map(([key, value]) => (
                     <MenuItem key={key} value={value}>

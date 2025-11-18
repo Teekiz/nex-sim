@@ -4,9 +4,8 @@ import './components/Display/CollectionLog/CollectionLog.css'
 import './components/Display/ItemsList/ItemLog.css'
 import InputBox from "./components/controls/InputBox.tsx";
 import DisplayContainer from "./components/Display/DisplayContainer.tsx";
-import Box from "@mui/material/Box";
 import TitleBox from "./components/Display/Title/TitleBox.tsx";
-import {createTheme, ThemeProvider} from "@mui/material";
+import {Container, createTheme, ThemeProvider} from "@mui/material";
 
 function App() {
 
@@ -22,25 +21,11 @@ function App() {
             fontSize: 16
         },
         components: {
-            MuiOutlinedInput: {
-                styleOverrides: {
-                    root: {
-                        "& fieldset": {
-                            borderColor: "white",
-                        },
-                        "&:hover fieldset": {
-                            borderColor: "lightgray",
-                        },
-                        "&.Mui-focused fieldset": {
-                            borderColor: "white",
-                        },
-                    },
-                },
-            },
             MuiFilledInput: {
                 styleOverrides: {
                     root: {
                         backgroundColor: "transparent",
+                        width: "100%",
 
                         "&:before": {
                             borderBottom: "1px solid white",
@@ -79,21 +64,31 @@ function App() {
                         color: "white",
                     }
                 }
+            },
+            MuiSelect: {
+                styleOverrides: {
+                    root: {
+                        width: "100%",
+                    }
+                }
+            },
+            MuiStack: {
+                styleOverrides: {
+                    root: {
+                        marginLeft: 0,
+                    }
+                }
             }
         },
     });
 
   return (
       <ThemeProvider theme={theme}>
-          <Box>
+          <Container maxWidth={"lg"}>
               <TitleBox></TitleBox>
-              <Box className="outer_app_container">
-                  <Box className="inner_app_box">
-                      <InputBox />
-                      <DisplayContainer />
-                    </Box>
-              </Box>
-          </Box>
+              <InputBox />
+              <DisplayContainer />
+          </Container>
       </ThemeProvider>
   );
 }

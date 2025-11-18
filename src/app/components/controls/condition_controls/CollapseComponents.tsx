@@ -24,7 +24,8 @@ export default function CollapseComponents({condition, rolls, setRolls, selected
                         variant="filled"
                         value={rolls}
                         onChange={(e) => setRolls(Number(e.target.value))}
-                        type="number"/>
+                        type={"text"}
+                        inputMode={"numeric"}/>
                 </Box>
             </Collapse>
         </Box><Box sx={{display: "contents"}}>

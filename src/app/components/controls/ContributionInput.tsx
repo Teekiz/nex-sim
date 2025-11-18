@@ -30,9 +30,9 @@ export default function ContributionInput({contribution, setContribution}: Contr
     }
 
     return (
-        <Box sx={{ width: 425, backgroundColor: "transparent"}}>
+        <Box sx={{backgroundColor: "transparent"}}>
             <InputLabel sx={{float: "none", textAlign: "center", fontSize: "14px"}}>Contribution (%)</InputLabel>
-            <div style={{float: "left"}}>
+            <Box style={{float: "left"}}>
                 <TextField
                     value={contribution[0]}
                     label="Min"
@@ -54,9 +54,9 @@ export default function ContributionInput({contribution, setContribution}: Contr
                     }}
                     sx={{mt: "-12px"}}
                 />
-            </div>
+            </Box>
 
-            <div style={{float: "right"}}>
+            <Box style={{float: "right"}}>
                 <TextField
                     value={contribution[1]}
                     label={"Max"}
@@ -78,7 +78,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                     }}
                     sx={{mt: "-12px"}}
                 />
-            </div>
+            </Box>
             <Slider
                 max={100}
                 min={0}

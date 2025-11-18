@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import {useRef, useState} from "react";
 import {
     Button,
-    Container,
+    Grid,
     type SelectChangeEvent,
     Stack
 } from "@mui/material";
@@ -68,14 +68,20 @@ export default function InputBox() {
     }
 
     return (
-        <Container maxWidth="md">
-            <Stack spacing={4} alignItems={"center"} alignContent={"flex-end"}>
+            <Stack spacing={3} alignItems={"center"} alignContent={"flex-end"}>
                 {/* Contribution + Team Size (same row) */}
-                <Stack direction={"row"} spacing={3} width={"100%"} justifyContent={"center"}>
-                    <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
-                    <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
-                    <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
-                </Stack>
+                <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
+                    <Grid className={"input_wrapper_1"} sx={{width: 225}}>
+                        <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
+                    </Grid>
+                    <Grid className={"input_wrapper_2"} sx={{width: 500}}>
+                        <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
+                    </Grid>
+                    <Grid className={"input_wrapper_3"} sx={{width: 225}}>
+                        <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
+                    </Grid>
+                </Grid>
+
 
                 {/* Condition-specific inputs */}
                 <CollapseComponents selectedItems={selectedItems} handleItemSelection={handleItemSelection} condition={condition} rolls={rolls} setRolls={setRolls}></CollapseComponents>
@@ -93,6 +99,5 @@ export default function InputBox() {
                     <Button variant="text" onClick={handleResetClick} sx={{backgroundColor: "#FFA500"}}>Reset</Button>
                 </Stack>
             </Stack>
-        </Container>
     );
 }
