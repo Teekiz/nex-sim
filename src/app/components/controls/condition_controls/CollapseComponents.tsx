@@ -1,8 +1,7 @@
-import Box from "@mui/material/Box";
-import {Collapse} from "@mui/material";
+import {Box, Collapse, Stack} from "@mui/material";
 import {Condition} from "../../../../lib/enum/conditions.ts";
 import TextField from "@mui/material/TextField";
-import ItemsCheckbox from "../ItemsCheckbox.tsx";
+import ItemsCheckbox from "./ItemsCheckbox.tsx";
 
 interface CollapseComponentsProps {
     condition: Condition;
@@ -14,11 +13,12 @@ interface CollapseComponentsProps {
 
 export default function CollapseComponents({condition, rolls, setRolls, selectedItems, handleItemSelection}: CollapseComponentsProps) {
     return (
-        <><Box sx={{display: "contents"}}>
-            <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
-                condition === Condition.UNTIL_UNIQUE_COUNT ||
-                condition === Condition.UNTIL_SHARD_COUNT}>
-                <Box sx={{mt: 2}}>
+        <Stack useFlexGap={true} width={"100%"} direction="column" alignItems="center" flexWrap={"wrap"} justifyContent={"center"}>
+            {/* Number of rolls input */}
+            <Box sx={{width: 140}}>
+                <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
+                    condition === Condition.UNTIL_UNIQUE_COUNT ||
+                    condition === Condition.UNTIL_SHARD_COUNT}>
                     <TextField
                         label="Number of Rolls"
                         variant="filled"
@@ -26,16 +26,17 @@ export default function CollapseComponents({condition, rolls, setRolls, selected
                         onChange={(e) => setRolls(Number(e.target.value))}
                         type={"text"}
                         inputMode={"numeric"}/>
-                </Box>
-            </Collapse>
-        </Box><Box sx={{display: "contents"}}>
-            <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
-                <Box sx={{mt: 2}}>
+                </Collapse>
+            </Box>
+
+            {/* Select item input */}
+            <Box sx={{maxWidth: 500}}>
+                <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
                     <ItemsCheckbox
                         handleSelected={handleItemSelection}
                         selectedIds={selectedItems}/>
-                </Box>
-            </Collapse>
-        </Box></>
+                </Collapse>
+            </Box>
+        </Stack>
     );
 }
