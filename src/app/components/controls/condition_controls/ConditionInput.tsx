@@ -25,5 +25,4 @@ export default function ConditionInput({condition, handleConditionChange}: Condi
             </Select>
         </FormControl>
     );
-
 }

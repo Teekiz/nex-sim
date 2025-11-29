@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {
     Button,
     Grid,
@@ -31,6 +31,12 @@ export default function InputBox() {
 
     const resetItemsQuantity = useItemsStore().resetQuantity;
     const resetStatistics = useStatisticsStore().resetStatistics;
+
+    useEffect(() => {
+        if (isConditionMet) {
+            handleCancelSim();
+        }
+    }, [isConditionMet])
 
     const handleRollClick = () => {
         setHasSimulationAutoRolledStarted(true);
