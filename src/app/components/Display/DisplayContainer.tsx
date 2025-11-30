@@ -1,18 +1,23 @@
 import CollectionLog from "./CollectionLog/CollectionLog.tsx";
 import ItemStats from "./Stats.tsx";
-import {Stack} from "@mui/material";
+import {Grid} from "@mui/material";
 import ItemLog from "./ItemsList/ItemLog.tsx";
-import Box from "@mui/material/Box";
 
 export default function DisplayContainer(){
 
     return (
-        <Stack direction="column" alignItems={"center"} sx={{marginTop: 2}}>
-            <Box sx={{minWidth: "200px", maxWidth: "490px"}}>
-                <CollectionLog/>
-                <ItemLog/>
-            </Box>
-            <ItemStats/>
-        </Stack>
+            <Grid container direction={"column"} alignItems={"center"} justifyContent="center" spacing={1} sx={{marginTop: 2}}>
+                <Grid size={{xs: 12, sm: 10, md: 7, lg: 5}}>
+                    <CollectionLog/>
+                </Grid>
+
+                <Grid size={{xs: 12, sm: 10, md: 7, lg: 5}}>
+                    <ItemLog/>
+                </Grid>
+
+                <Grid size={{xs: 12, sm: 10, md: 7, lg: 5}}>
+                    <ItemStats/>
+                </Grid>
+            </Grid>
     );
 }
