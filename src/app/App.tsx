@@ -62,6 +62,8 @@ function App() {
                         width: "100%",
                         height: "100%",
                         color: "white",
+                        minWidth: "165px",
+                        minHeight: "50px"
                     }
                 }
             },

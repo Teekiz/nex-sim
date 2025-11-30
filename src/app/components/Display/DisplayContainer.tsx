@@ -7,8 +7,8 @@ import Box from "@mui/material/Box";
 export default function DisplayContainer(){
 
     return (
-        <Stack direction="column" alignItems={"center"}>
-            <Box className={"display_box"}>
+        <Stack direction="column" alignItems={"center"} sx={{marginTop: 2}}>
+            <Box sx={{minWidth: "200px", maxWidth: "490px"}}>
                 <CollectionLog/>
                 <ItemLog/>
             </Box>

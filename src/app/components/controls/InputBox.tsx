@@ -76,17 +76,17 @@ export default function InputBox() {
     return (
             <Stack spacing={1} rowGap={1} alignItems={"center"} alignContent={"flex-end"}>
                 <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
-                    <Grid sx={{width: 500}}>
+                    <Grid size={{xs: 12, sm: 10, md: 8, lg: 6}}>
                         <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
                     </Grid>
                 </Grid>
 
                 <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
-                    <Grid sx={{width: 140}}>
+                    <Grid size={{xs: 6, sm: 4, md: 3, lg: 2}}>
                         <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
                     </Grid>
 
-                    <Grid sx={{width: 140}}>
+                    <Grid size={{xs: 6, sm: 4, md: 3, lg: 2}}>
                         <ConditionInput condition={condition} handleConditionChange={handleConditionChange}></ConditionInput>
                     </Grid>
                 </Grid>
@@ -96,14 +96,17 @@ export default function InputBox() {
                 <CollapseComponents selectedItems={selectedItems} handleItemSelection={handleItemSelection} condition={condition} rolls={rolls} setRolls={setRolls}></CollapseComponents>
 
                 {/* Buttons */}
-                <Stack direction="row" spacing={2} justifyContent="center" width={400}>
+                <Stack direction="row"
+                       spacing={{xs: 1, sm: 2, md: 2, lg: 3, xl: 4}}
+                       justifyContent="center"
+                       minWidth={200}>
                 <Button
                         variant="text"
                         onClick={isButtonConditionMet() ? handleCancelSim : handleRollClick}
                         disabled={isConditionMet}
                         sx={{backgroundColor: isButtonConditionMet() ? "red" : "forestgreen"}}
                     >
-                        {isButtonConditionMet() ? "Cancel Rolls" : "Generate Rolls"}
+                        {isButtonConditionMet() ? "Stop" : "Start"}
                     </Button>
                     <Button variant="text" onClick={handleResetClick} sx={{backgroundColor: "#FFA500"}}>Reset</Button>
                 </Stack>

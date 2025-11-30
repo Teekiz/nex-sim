@@ -32,7 +32,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
     return (
         <Box sx={{backgroundColor: "transparent", minWidth: "100%"}}>
             <InputLabel sx={{float: "none", textAlign: "center", fontSize: "14px"}}>Contribution (%)</InputLabel>
-            <Box style={{float: "left"}}>
+            <Box style={{display: "flex", justifyContent: "space-between"}} sx={{mt: "-12px"}}>
                 <TextField
                     value={contribution[0]}
                     label="Min"
@@ -40,6 +40,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                     type={"text"}
                     inputMode={"decimal"}
                     variant={"filled"}
+                    fullWidth={false}
                     onChange={(event) => updateContributionNumber(Number(event.target.value), 0)}
                     slotProps={{
                         input: {
@@ -52,11 +53,9 @@ export default function ContributionInput({contribution, setContribution}: Contr
                             },
                         },
                     }}
-                    sx={{mt: "-12px"}}
+                    sx={{width: "25%"}}
                 />
-            </Box>
 
-            <Box style={{float: "right"}}>
                 <TextField
                     value={contribution[1]}
                     label={"Max"}
@@ -64,6 +63,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                     type={"text"}
                     inputMode={"decimal"}
                     variant={"filled"}
+                    fullWidth={false}
                     onChange={(event) => updateContributionNumber(Number(event.target.value), 1)}
                     slotProps={{
                         input: {
@@ -76,7 +76,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                             },
                         },
                     }}
-                    sx={{mt: "-12px"}}
+                    sx={{width: "25%"}}
                 />
             </Box>
             <Slider

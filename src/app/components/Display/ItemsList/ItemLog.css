@@ -57,13 +57,3 @@
     flex-shrink: 0;
     width: max-content;
 }
-
-/* Optional: for WebKit browsers (Chrome, Edge, Safari) */
-.item_log_scroll_box::-webkit-scrollbar {
-    height: 6px;
-}
-.item_log_scroll_box::-webkit-scrollbar-thumb {
-    background: #3a3229;
-    border-radius: 4px;
-}
-
