@@ -1,4 +1,5 @@
 import {Tables} from "../enum/tables.ts";
+import {getUniqueChance} from "../util/util.ts";
 
 export function rollTables(contribution: number, teamsize: number): Tables[]
 {
@@ -19,9 +20,7 @@ export function rollTables(contribution: number, teamsize: number): Tables[]
 
 function rollUniqueTable(contribution: number): boolean{
     const contributionPercent = contribution * 100;
-    const rolls = Math.ceil(43 * (100 / contributionPercent));
-    const chance = 1 / rolls;
-
+    const chance = 1 / getUniqueChance(contributionPercent);
     return Math.random() < chance;
 }
 

@@ -13,7 +13,6 @@ export default function ItemLogItem({item}: {item: ItemLog}) {
         })}>
             <ItemImage name={item.name} imageUrl={getImageUrl(item.id)} isGreyedOut={false}/>
             <span className="item_log_item_box_kc">{item.rollCount}</span>
-
         </Box>
     );
 }

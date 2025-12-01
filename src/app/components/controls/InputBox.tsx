@@ -4,12 +4,12 @@ import {
     Button,
     Grid,
     type SelectChangeEvent,
-    Stack
+    Stack, Tooltip
 } from "@mui/material";
 import {simulateDrops} from "../../../lib/simulation/simulator.ts";
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 import {useItemsStore} from "../../../stores/itemStore.ts";
-import {Condition} from "../../../lib/enum/conditions.ts";
+import {Conditions} from "../../../lib/enum/conditions.ts";
 import {checkCondition} from "../../../lib/simulation/conditions.ts";
 import ContributionInput from "./ContributionInput.tsx";
 import ConditionInput from "./condition_controls/ConditionInput.tsx";
@@ -22,7 +22,7 @@ export default function InputBox() {
     const [rolls, setRolls] = useState(10);
     const [selectedItems, setSelectedItems] = useState<number[]>([1,2,3,4,5,6,7]);
 
-    const [condition, setCondition] = useState<Condition>(Condition.UNTIL_ROLL_COUNT);
+    const [condition, setCondition] = useState<Conditions>(Conditions.UNTIL_ROLL_COUNT);
     const isConditionMet = checkCondition(condition, rolls, selectedItems);
 
     //these are used to stop and start the roll - controlled by the user
@@ -48,8 +48,13 @@ export default function InputBox() {
     }
 
     const handleConditionChange = (event: SelectChangeEvent) => {
-        setCondition(event.target.value as Condition);
-        setHasSimulationAutoRolledStarted(false);
+        const key = event.target.value;
+        const condition = Conditions.getConditionFromKey(key);
+
+        if (condition){
+            setCondition(condition);
+            setHasSimulationAutoRolledStarted(false);
+        }
     };
 
     const handleResetClick = () => {
@@ -83,7 +88,26 @@ export default function InputBox() {
 
                 <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
                     <Grid size={{xs: 6, sm: 4, md: 3, lg: 2}}>
-                        <TextField id="outlined-basic" label="Team size" variant="filled" value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))} type={"text"} inputMode={"numeric"}/>
+                        <Tooltip title={"The number of people in your team (1-60)."}>
+                            <TextField id="outlined-basic"
+                                       label="Team size"
+                                       variant="filled"
+                                       value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))}
+                                       type={"text"}
+                                       inputMode={"numeric"}
+                                       slotProps={{
+                                           input: {
+                                               inputProps: {
+                                                   min: 1,
+                                                   max: 60,
+                                                   step: 1,
+                                                   type: 'number',
+                                                   'aria-labelledby': 'input-slider',
+                                               },
+                                           },
+                                       }}
+                            />
+                        </Tooltip>
                     </Grid>
 
                     <Grid size={{xs: 6, sm: 4, md: 3, lg: 2}}>

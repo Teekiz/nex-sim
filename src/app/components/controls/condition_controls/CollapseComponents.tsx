@@ -1,10 +1,10 @@
 import {Collapse, Stack} from "@mui/material";
-import {Condition} from "../../../../lib/enum/conditions.ts";
+import {Conditions} from "../../../../lib/enum/conditions.ts";
 import TextField from "@mui/material/TextField";
 import ItemsCheckbox from "./ItemsCheckbox.tsx";
 
 interface CollapseComponentsProps {
-    condition: Condition;
+    condition: Conditions;
     rolls: number;
     setRolls: (number: number) => void;
     selectedItems: number[];
@@ -15,11 +15,11 @@ export default function CollapseComponents({condition, rolls, setRolls, selected
     return (
         <Stack useFlexGap={true} width={{xs: "90%", sm: "70%", md: "50%"}} direction="column" alignItems="center" flexWrap={"wrap"} justifyContent={"center"}>
             {/* Number of rolls input */}
-            <Collapse in={condition === Condition.UNTIL_ROLL_COUNT ||
-                condition === Condition.UNTIL_UNIQUE_COUNT ||
-                condition === Condition.UNTIL_SHARD_COUNT}>
+            <Collapse in={condition === Conditions.UNTIL_ROLL_COUNT ||
+                condition === Conditions.UNTIL_UNIQUE_COUNT ||
+                condition === Conditions.UNTIL_SHARD_COUNT}>
                 <TextField
-                    label="Number of Rolls"
+                    label={condition.label}
                     variant="filled"
                     size={"small"}
                     value={rolls}
@@ -29,7 +29,7 @@ export default function CollapseComponents({condition, rolls, setRolls, selected
             </Collapse>
 
             {/* Select item input */}
-            <Collapse in={condition === Condition.UNTIL_SELECTED_ITEMS}>
+            <Collapse in={condition === Conditions.UNTIL_SELECTED_ITEMS}>
                 <ItemsCheckbox
                     handleSelected={handleItemSelection}
                     selectedIds={selectedItems}/>

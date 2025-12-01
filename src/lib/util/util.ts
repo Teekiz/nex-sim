@@ -25,3 +25,7 @@ export function getImageUrl(itemID: number): string {
     const item = getItems().find(item => item.id === itemID);
     return item === undefined ? "" : item.imageUrl;
 }
+
+export function getUniqueChance(contributionPercentage: number): number {
+    return Math.ceil(43 * (100 / contributionPercentage));
+}

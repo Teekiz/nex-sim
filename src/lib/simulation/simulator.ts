@@ -2,21 +2,21 @@ import {rollTableItems} from "./items.ts";
 
 import {rollTables} from "./tables.ts";
 import {useStatisticsStore} from "../../stores/statisticsStore.ts";
-import {Condition} from "../enum/conditions.ts";
+import {Conditions} from "../enum/conditions.ts";
 import React from "react";
 import {checkCondition} from "./conditions.ts";
 
 //A function which simulates the drops. It first rolls to check which tables should be rolled and then will roll until the given condition has been met.
-export function simulateDrops({hasSimulationAutoRollStartedRef}: {hasSimulationAutoRollStartedRef: React.RefObject<boolean>}, condition: Condition, teamsize: number, contributionRange: number[], targetRolls?: number, targetIds?: number[])
+export function simulateDrops({hasSimulationAutoRollStartedRef}: {hasSimulationAutoRollStartedRef: React.RefObject<boolean>}, condition: Conditions, teamsize: number, contributionRange: number[], targetRolls?: number, targetIds?: number[])
 {
     const {incrementTotalRolls} = useStatisticsStore.getState();
 
     //checks to ensure that the target information is provided before rolling the tables.
-    if ((condition === Condition.UNTIL_ROLL_COUNT || condition === Condition.UNTIL_SHARD_COUNT || condition === Condition.UNTIL_UNIQUE_COUNT) && targetRolls === undefined) {
+    if ((condition === Conditions.UNTIL_ROLL_COUNT || condition === Conditions.UNTIL_SHARD_COUNT || condition === Conditions.UNTIL_UNIQUE_COUNT) && targetRolls === undefined) {
         return;
     }
 
-    if (condition === Condition.UNTIL_SELECTED_ITEMS && (targetIds === undefined || targetIds?.length === 0)) {
+    if (condition === Conditions.UNTIL_SELECTED_ITEMS && (targetIds === undefined || targetIds?.length === 0)) {
         return;
     }
 
