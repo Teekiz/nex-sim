@@ -7,7 +7,7 @@
     margin: 2px 0;
     text-align: left;
     overflow: hidden;
-    height: 50px;
+    height: 60px;
 }
 
 .item_log_item_box {
@@ -47,7 +47,7 @@
     display: block;
     scrollbar-gutter: stable both-edges;
     height: 100%;
-    padding-bottom: 55px;
+    padding-bottom: 60px;
 }
 
 .item_log_scroll_box > * {

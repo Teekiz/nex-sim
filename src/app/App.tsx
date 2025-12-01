@@ -95,6 +95,14 @@ function App() {
                         margin: 0,
                     }
                 }
+            },
+            MuiPaper: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: "transparent",
+                        elevation: 24,
+                    }
+                }
             }
         },
     });

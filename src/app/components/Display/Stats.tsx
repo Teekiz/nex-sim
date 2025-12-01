@@ -1,7 +1,6 @@
 import {useStatisticsStore} from "../../../stores/statisticsStore.ts";
 import {getShardCount, getUniqueCount} from "../../../lib/util/util.ts";
-import Box from "@mui/material/Box";
-import {Stack} from "@mui/material";
+import {Grid, Paper, Stack, Typography} from "@mui/material";
 
 export default function ItemStats() {
 
@@ -21,39 +20,43 @@ export default function ItemStats() {
     const longestDryStreak = useStatisticsStore().longestDryStreak;
 
     return (
-        <Box display={"flex"} flexDirection="column" alignItems="center" gap={1.5}>
-            <Stack direction={"row"} alignItems={"center"} spacing={1}>
-                <Box className={"collection_log_box"}>
-                    <Box className={"collection_log_inner_box"} sx={{width: "100px"}}>
-                        <p>Total uniques: <span className={"text_white"}>{totalUniques}</span></p>
-                    </Box>
-                </Box>
-            </Stack>
-            <Stack direction={"row"} alignItems={"center"} spacing={2}>
-                <Box className={"collection_log_box"}>
-                    <Box className={"collection_log_inner_box"} sx={{width: "150px"}}>
-                        <p>Current dry streak: <span className={"text_white"}>{currentDryStreak}</span></p>
-                    </Box>
-                </Box>
-                <Box className={"collection_log_box"}>
-                <Box className={"collection_log_inner_box"} sx={{width: "150px"}}>
-                        <p>Longest dry streak: <span className={"text_white"}>{longestDryStreak}</span></p>
-                    </Box>
-                </Box>
-            </Stack>
+        <Paper variant={"elevation"}>
+            <Grid container spacing={2} alignItems={"center"} justifyContent={"space-between"}>
+                <Grid size={{xs: 6, sm: 4, md: 4}}>
+                    <Stack direction={"column"} alignItems={"center"} spacing={0} justifyContent={"center"}>
+                        <Typography variant="body2" fontWeight="bold">Total uniques:</Typography>
+                        <Typography variant="body1">{totalUniques}</Typography>
+                    </Stack>
+                </Grid>
 
-            <Stack direction={"row"} alignItems={"center"} spacing={2}>
-                <Box className={"collection_log_box"}>
-                    <Box className={"collection_log_inner_box"} sx={{width: "185px"}}>
-                        <p>Average shards per drop: <span className={"text_white"}>{shardsPerDrop}</span></p>
-                    </Box>
-                </Box>
-                <Box className={"collection_log_box"}>
-                    <Box className={"collection_log_inner_box"} sx={{width: "185px"}}>
-                        <p>Actual drop rate: <span className={"text_white"}>1 in {dropRateInverse}</span></p>
-                    </Box>
-                </Box>
-            </Stack>
-        </Box>
+                <Grid size={{xs: 6, sm: 4, md: 4}}>
+                    <Stack direction={"column"} alignItems={"center"} spacing={0}>
+                        <Typography variant="body2" fontWeight="bold">Current dry streak:</Typography>
+                        <Typography variant="body1">{currentDryStreak}</Typography>
+                    </Stack>
+                </Grid>
+
+                <Grid size={{xs: 6, sm: 4, md: 4}}>
+                    <Stack direction={"column"} alignItems={"center"} spacing={0}>
+                        <Typography variant="body2" fontWeight="bold">Longest dry streak:</Typography>
+                        <Typography variant="body1">{longestDryStreak}</Typography>
+                    </Stack>
+                </Grid>
+
+                <Grid size={{xs: 6, sm: 4, md: 4}}>
+                    <Stack direction={"column"} alignItems={"center"} spacing={0}>
+                        <Typography variant="body2" fontWeight="bold">Shards per drop:</Typography>
+                        <Typography variant="body1">{shardsPerDrop}</Typography>
+                    </Stack>
+                </Grid>
+
+                <Grid size={{xs: 12, sm: 4, md: 4}}>
+                    <Stack direction={"column"} alignItems={"center"} spacing={0}>
+                        <Typography variant="body2" fontWeight="bold">Actual drop rate:</Typography>
+                        <Typography variant="body1">1 in {dropRateInverse}</Typography>
+                    </Stack>
+                </Grid>
+                </Grid>
+        </Paper>
     );
 }
