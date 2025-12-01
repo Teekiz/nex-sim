@@ -5,7 +5,7 @@ import './components/Display/ItemsList/ItemLog.css'
 import InputBox from "./components/controls/InputBox.tsx";
 import DisplayContainer from "./components/Display/DisplayContainer.tsx";
 import TitleBox from "./components/Display/Title/TitleBox.tsx";
-import {Container, createTheme, ThemeProvider} from "@mui/material";
+import {alpha, Container, createTheme, ThemeProvider} from "@mui/material";
 
 function App() {
 
@@ -98,6 +98,30 @@ function App() {
                     root:{
                         width: "100%",
                         margin: 0,
+                    }
+                }
+            },
+            MuiSlider: {
+              styleOverrides: {
+                  valueLabel: {
+                      fontFamily: 'RunescapePlain',
+                      fontSize: 16,
+                      backgroundColor: alpha('#ae4cf5', 1).toString()
+                  }
+              }
+            },
+            MuiTooltip: {
+                defaultProps: {
+                    enterDelay: 400,
+                    leaveDelay: 0,
+                    enterNextDelay: 300,
+                    enterTouchDelay: 400,
+                    leaveTouchDelay: 0
+                },
+                styleOverrides: {
+                    tooltip: {
+                        fontSize: 16,
+                        backgroundColor: alpha('#ae4cf5', 1).toString()
                     }
                 }
             }
