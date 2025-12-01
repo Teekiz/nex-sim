@@ -18,7 +18,12 @@ function App() {
         },
         typography: {
             fontFamily: 'RunescapePlain',
-            fontSize: 16
+            fontSize: 16,
+
+            body2: {
+                fontFamily: 'RunescapeBold',
+                fontSize: 16
+            }
         },
         components: {
             MuiFilledInput: {

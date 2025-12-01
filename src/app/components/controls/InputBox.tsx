@@ -20,7 +20,7 @@ export default function InputBox() {
     const [contributionRange, setContributionRange] = useState<number[]>([33.3, 40.0]);
     const [teamsize, setteamsize] = useState(3);
     const [rolls, setRolls] = useState(10);
-    const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const [selectedItems, setSelectedItems] = useState<number[]>([1,2,3,4,5,6,7]);
 
     const [condition, setCondition] = useState<Condition>(Condition.UNTIL_ROLL_COUNT);
     const isConditionMet = checkCondition(condition, rolls, selectedItems);
