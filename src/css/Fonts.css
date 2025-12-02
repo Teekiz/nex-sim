@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'RunescapePlain';
+    src: url('../assets/Fonts/RuneScape-Plain-12.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RunescapeBold';
+    src: url('../assets/Fonts/RuneScape-Bold-12.ttf') format('truetype');
+}
+
+.text_white {
+    color: #ffffff;
+}
+
+.text_yellow {
+    color: #f6f600;
+}
+
+.text_green {
+    color: #0dc10d;
+}
+
+.text_red {
+    color: #92241d;
+}

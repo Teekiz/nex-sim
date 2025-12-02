@@ -1,10 +1,11 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import '../css/Index.css'
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <title>OSRS Nex Loot Simulator</title>
     <App />
-  </StrictMode>,
+  </StrictMode>
 )

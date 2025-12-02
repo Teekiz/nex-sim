@@ -3,21 +3,21 @@ import {getShardCount, getUniqueCount} from "../util/util.ts";
 import {useStatisticsStore} from "../../stores/statisticsStore.ts";
 import {useItemsStore} from "../../stores/itemStore.ts";
 import {Tables} from "../enum/tables.ts";
-import {Condition} from "../enum/conditions.ts";
+import {Conditions} from "../enum/conditions.ts";
 
-export function checkCondition(condition: Condition,  targetRolls?: number, targetIds?: number[]) {
+export function checkCondition(condition: Conditions,  targetRolls?: number, targetIds?: number[]) {
     switch (condition) {
-        case Condition.UNTIL_ROLL_COUNT:
+        case Conditions.UNTIL_ROLL_COUNT:
             return conditionalOnRollTarget(targetRolls!);
-        case Condition.UNTIL_SHARD_COUNT:
+        case Conditions.UNTIL_SHARD_COUNT:
              return conditionalOnShardCount(targetRolls!);
-        case Condition.UNTIL_UNIQUE_COUNT:
+        case Conditions.UNTIL_UNIQUE_COUNT:
              return conditionalOnUniqueCount(targetRolls!);
-        case Condition.UNTIL_PET_DROP:
+        case Conditions.UNTIL_PET_DROP:
             return conditionalOnPetReceived();
-        case Condition.UNTIL_SELECTED_ITEMS:
+        case Conditions.UNTIL_SELECTED_ITEMS:
             return conditionalOnItemsSelected(targetIds!);
-        case Condition.UNTIL_ALL_ITEMS:
+        case Conditions.UNTIL_ALL_ITEMS:
             return conditionalOnAllItems();
         default:
             return true;

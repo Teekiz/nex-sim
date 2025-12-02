@@ -1,14 +1,14 @@
 import {create} from 'zustand'
 import {Tables} from "../lib/enum/tables.ts";
 
-import Nexling from "../assets/Nexling.png";
-import Ancienthilt from "../assets/Ancienthilt.png";
-import Nihilhorn from "../assets/Nihilhorn.png";
-import Zarytevambraces from "../assets/Zarytevambraces.png";
-import Torvafullhelmdamaged from "../assets/Torvafullhelmdamaged.png";
-import Torvaplatebodydamaged from "../assets/Torvaplatebodydamaged.png";
-import Torvaplatelegsdamaged from "../assets/Torvaplatelegsdamaged.png";
-import Nihilshard from "../assets/Nihilshard.png";
+import Nexling from "../assets/Images/Nexling.png";
+import Ancienthilt from "../assets/Images/Ancienthilt.png";
+import Nihilhorn from "../assets/Images/Nihilhorn.png";
+import Zarytevambraces from "../assets/Images/Zarytevambraces.png";
+import Torvafullhelmdamaged from "../assets/Images/Torvafullhelmdamaged.png";
+import Torvaplatebodydamaged from "../assets/Images/Torvaplatebodydamaged.png";
+import Torvaplatelegsdamaged from "../assets/Images/Torvaplatelegsdamaged.png";
+import Nihilshard from "../assets/Images/Nihilshard.png";
 
 export type Item = {
     id: number;

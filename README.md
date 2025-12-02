@@ -70,4 +70,6 @@ export default defineConfig([
     },
   },
 ])
+
+Fonts from https://github.com/RuneStar/fonts
 ```
