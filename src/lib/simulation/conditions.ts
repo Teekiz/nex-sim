@@ -1,10 +1,10 @@
-//A function to check if the target rolls has been met.
 import {getShardCount, getUniqueCount} from "../util/util.ts";
 import {useStatisticsStore} from "../../stores/statisticsStore.ts";
 import {useItemsStore} from "../../stores/itemStore.ts";
 import {Tables} from "../enum/tables.ts";
 import {Conditions} from "../enum/conditions.ts";
 
+//A function to check if the target rolls has been met.
 export function checkCondition(condition: Conditions,  targetRolls?: number, targetIds?: number[]) {
     switch (condition) {
         case Conditions.UNTIL_ROLL_COUNT:

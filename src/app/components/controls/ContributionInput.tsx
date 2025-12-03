@@ -9,6 +9,7 @@ interface ContributionInputProps {
     setContribution: (value: number[]) => void;
 }
 
+//todo - make sure that if the teamsize is 0, range is always 100
 export default function ContributionInput({contribution, setContribution}: ContributionInputProps) {
 
     const [activeThumb, setActiveThumb] = useState<number>(0);
