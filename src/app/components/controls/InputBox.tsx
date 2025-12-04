@@ -18,7 +18,10 @@ import CollapseComponents from "./condition_controls/CollapseComponents.tsx";
 export default function InputBox() {
 
     const [contributionRange, setContributionRange] = useState<number[]>([33.3, 40.0]);
+    const [lastSavedContributionRange, setLastSavedContributionRange] = useState<number[]>([33.3, 40.0]);
+
     const [teamsize, setteamsize] = useState(3);
+
     const [rolls, setRolls] = useState(10);
     const [selectedItems, setSelectedItems] = useState<number[]>([1,2,3,4,5,6,7]);
 
@@ -38,6 +41,10 @@ export default function InputBox() {
         }
     }, [isConditionMet])
 
+    useEffect(() => {
+        handleCancelSim();
+    }, [contributionRange, teamsize, selectedItems, rolls])
+
     const handleRollClick = () => {
         setHasSimulationAutoRolledStarted(true);
         simulateDrops({hasSimulationAutoRollStartedRef}, condition, teamsize, contributionRange, rolls, selectedItems);
@@ -45,6 +52,16 @@ export default function InputBox() {
 
     const handleCancelSim = () => {
         setHasSimulationAutoRolledStarted(false);
+    }
+
+    const updateTeamSize = (value: number) => {
+        if (value === 1) {
+            setLastSavedContributionRange(contributionRange);
+            setContributionRange([100, 100]);
+        } else if (teamsize == 1 && value > 1) {
+            setContributionRange(lastSavedContributionRange);
+        }
+        setteamsize(value);
     }
 
     const handleConditionChange = (event: SelectChangeEvent) => {
@@ -82,7 +99,7 @@ export default function InputBox() {
             <Stack spacing={1} rowGap={1} alignItems={"center"} alignContent={"flex-end"}>
                 <Grid container direction={"row"} spacing={3} width={"100%"} justifyContent={"center"} alignItems={"flex-start"} flexWrap={"wrap"}>
                     <Grid size={{xs: 12, sm: 10, md: 8, lg: 6}}>
-                        <ContributionInput contribution={contributionRange} setContribution={setContributionRange}></ContributionInput>
+                        <ContributionInput contribution={contributionRange} setContribution={setContributionRange} teamSize={teamsize}></ContributionInput>
                     </Grid>
                 </Grid>
 
@@ -92,7 +109,7 @@ export default function InputBox() {
                             <TextField id="outlined-basic"
                                        label="Team size"
                                        variant="filled"
-                                       value={teamsize} onChange={(e) => setteamsize(Number(e.target.value))}
+                                       value={teamsize} onChange={(e) => updateTeamSize(Number(e.target.value))}
                                        type={"text"}
                                        inputMode={"numeric"}
                                        slotProps={{

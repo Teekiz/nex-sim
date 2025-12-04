@@ -7,15 +7,16 @@ import {useState} from "react";
 interface ContributionInputProps {
     contribution: number[];
     setContribution: (value: number[]) => void;
+    teamSize: number;
 }
 
-//todo - make sure that if the teamsize is 0, range is always 100
-export default function ContributionInput({contribution, setContribution}: ContributionInputProps) {
+export default function ContributionInput({contribution, setContribution, teamSize}: ContributionInputProps) {
 
     const [activeThumb, setActiveThumb] = useState<number>(0);
 
     const updateContributionArray = (value: number | number[]) => {
         if (!Array.isArray(value)) return
+        if (isDisabled()) return
 
         const [min, max] = value;
         const trueMin = Math.min(min, max);
@@ -32,6 +33,10 @@ export default function ContributionInput({contribution, setContribution}: Contr
         } else {
             updateContributionArray([contribution[0], value]);
         }
+    }
+
+    function isDisabled(): boolean {
+        return teamSize <= 1;
     }
 
     const sliderLabel = (): string => {
@@ -52,6 +57,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                         variant={"filled"}
                         fullWidth={false}
                         onChange={(event) => updateContributionNumber(Number(event.target.value), 0)}
+                        aria-readonly={isDisabled()}
                         slotProps={{
                             input: {
                                 inputProps: {
@@ -77,6 +83,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                         variant={"filled"}
                         fullWidth={false}
                         onChange={(event) => updateContributionNumber(Number(event.target.value), 1)}
+                        aria-readonly={isDisabled()}
                         slotProps={{
                             input: {
                                 inputProps: {
@@ -102,6 +109,7 @@ export default function ContributionInput({contribution, setContribution}: Contr
                 valueLabelDisplay={'auto'}
                 valueLabelFormat={sliderLabel}
                 aria-label={"Contribution slider."}
+                disabled={isDisabled()}
                 marks={[
                     { value: 0, label: "0%" },
                     { value: 10, label: "" },
