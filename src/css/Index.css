@@ -1,8 +1,4 @@
 :root {
-    font-family: 'RunescapePlain', serif;
-    line-height: 1.5;
-    font-weight: 400;
-
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background: radial-gradient(circle at 50%, #640393, #0a0010 90%);

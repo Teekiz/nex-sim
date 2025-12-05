@@ -1,11 +1,9 @@
-import '../css/App.css'
 import '../css/Fonts.css'
 import './components/Display/CollectionLog/CollectionLog.css'
 import './components/Display/ItemsList/ItemLog.css'
 import InputBox from "./components/controls/InputBox.tsx";
 import DisplayContainer from "./components/Display/DisplayContainer.tsx";
-import TitleBox from "./components/Display/Title/TitleBox.tsx";
-import {alpha, Container, createTheme, ThemeProvider} from "@mui/material";
+import {alpha, Container, createTheme, ThemeProvider, Typography} from "@mui/material";
 
 function App() {
 
@@ -19,10 +17,24 @@ function App() {
         typography: {
             fontFamily: 'RunescapePlain',
             fontSize: 16,
+            fontWeightRegular: 400,
 
             body2: {
                 fontFamily: 'RunescapeBold',
                 fontSize: 16
+            },
+            h1: {
+                fontFamily: 'RuneScapeBold',
+                fontSize: 32,
+                color: "#b4ae1c",
+                textAlign: "center",
+                margin: 0,
+                padding: 0,
+            },
+            h3: {
+                fontFamily: 'RuneScapeBold',
+                fontSize: "16",
+                display: "block"
             }
         },
         components: {
@@ -131,7 +143,7 @@ function App() {
   return (
       <ThemeProvider theme={theme}>
           <Container maxWidth={"lg"}>
-              <TitleBox></TitleBox>
+              <Typography variant={"h1"}>Nex Loot Simulator</Typography>
               <InputBox />
               <DisplayContainer />
           </Container>

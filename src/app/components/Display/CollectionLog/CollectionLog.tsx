@@ -1,5 +1,5 @@
 
-import {Divider, Grid, Stack} from "@mui/material";
+import {Divider, Grid, Stack, Typography} from "@mui/material";
 import CollectionLogItem from "./CollectionLogItem.tsx";
 import {useItemsStore} from "../../../../stores/itemStore.ts";
 import {useStatisticsStore} from "../../../../stores/statisticsStore.ts";
@@ -22,7 +22,7 @@ export default function CollectionLog() {
     return (
         <Box className={"collection_log_box"}>
             <Stack className={"collection_log_inner_box"}>
-                <b>Nex</b>
+                <Typography variant={"h3"}>Nex</Typography>
                 <p>Obtained: <span className={getObtainedColour()}>{getCollectionLogCount()}/{items.length}</span></p>
                 <p>Nex kills: <span className={"text_white"}>{timesRolled}</span></p>
             </Stack>
