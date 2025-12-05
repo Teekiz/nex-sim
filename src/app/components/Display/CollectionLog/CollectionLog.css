@@ -26,11 +26,6 @@
     line-height: 1.1;
 }
 
-.collection_log_inner_box b {
-    font-family: 'RunescapeBold', serif;
-    display: block;
-}
-
 .collection_log_divider {
     background-color: #3a3229;
     height: 1px;
@@ -38,7 +33,6 @@
 }
 
 .collection_log_item_box {
-    font-family: 'RunescapePlain', serif;
     color: #ff981f;
     position: relative;
     display: inline-block;
@@ -50,7 +44,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    font-family: 'RunescapePlain', serif;
     font-size: 14px;
     color: #f6f600;
     text-shadow: 1px 1px 2px #000;

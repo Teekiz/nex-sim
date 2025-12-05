@@ -5,6 +5,7 @@ import {Grid, Stack, Typography} from "@mui/material";
 export default function ItemStats() {
 
     const timesRolled = useStatisticsStore().totalRolls;
+    const mvpCount = useStatisticsStore().mvpCount;
     const totalUniques = getUniqueCount();
     const totalShards = getShardCount();
 
@@ -15,7 +16,7 @@ export default function ItemStats() {
 
     const dropRate = totalUniques / timesRolled; // decimal fraction
     const dropRateInverse = dropRate > 0 ? Math.round(1 / dropRate) : Infinity;
-
+    const mvpChance = Math.round((mvpCount / timesRolled) * 100);
     const currentDryStreak = useStatisticsStore().currentDryStreak;
     const longestDryStreak = useStatisticsStore().longestDryStreak;
 
@@ -35,10 +36,17 @@ export default function ItemStats() {
                 </Stack>
             </Grid>
 
-            <Grid size={{xs: 12, sm: 4, md: 4}}>
+            <Grid size={{xs: 6, sm: 4, md: 4}}>
                 <Stack direction={"column"} alignItems={"center"} spacing={0}>
                     <Typography variant="body2" fontWeight="bold">Actual drop rate:</Typography>
                     <Typography variant="body1">1 in {dropRateInverse}</Typography>
+                </Stack>
+            </Grid>
+
+            <Grid size={{xs: 6, sm: 4, md: 4}}>
+                <Stack direction={"column"} alignItems={"center"} spacing={0}>
+                    <Typography variant="body2" fontWeight="bold">MVP percentage:</Typography>
+                    <Typography variant="body1">{isNaN(mvpChance) ? 100 : mvpChance}%</Typography>
                 </Stack>
             </Grid>
 

@@ -1,6 +1,5 @@
 .items_received_modal {
     background-color: #585040;
-    font-family: 'RunescapePlain', serif;
     color: #b4ae1c;
     padding: 4px;
     border-radius: 6px;
@@ -19,7 +18,6 @@
 }
 
 .items_received_modal_title {
-    font-family: 'RunescapeBold', serif;
     font-size: 1rem;
     color: #ff981f;
     margin: 0;

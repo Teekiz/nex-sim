@@ -4,11 +4,13 @@ type statisticsStore = {
     totalRolls: number;
     longestDryStreak: number;
     currentDryStreak: number;
+    mvpCount: number;
     itemLog: ItemLog[];
 
     incrementTotalRolls: () => void;
     addItemToItemLog: (id: number, name: string) => void;
     incrementDryStreak: () => void;
+    incrementMvpCount: () => void;
     resetDryStreak: () => void;
     resetStatistics: () => void;
 }
@@ -23,6 +25,7 @@ export const useStatisticsStore = create<statisticsStore>((set) => ({
     totalRolls: 0,
     longestDryStreak: 0,
     currentDryStreak: 0,
+    mvpCount: 0,
     itemLog: [],
 
     incrementTotalRolls: () =>
@@ -49,6 +52,11 @@ export const useStatisticsStore = create<statisticsStore>((set) => ({
             };
         }),
 
+    incrementMvpCount: () =>
+        set((state) => ({
+            mvpCount: state.mvpCount + 1,
+        })),
+
     resetDryStreak: () =>
         set(() => ({
             currentDryStreak: 0,
@@ -58,6 +66,7 @@ export const useStatisticsStore = create<statisticsStore>((set) => ({
         totalRolls: 0,
         currentDryStreak: 0,
         longestDryStreak: 0,
+        mvpCount: 0,
         itemLog: []
     }))
 }));
