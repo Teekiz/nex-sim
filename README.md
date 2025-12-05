@@ -1,75 +1,42 @@
-# React + TypeScript + Vite
+# Old School Runescape Nex Loot Simulator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simulator designed to simulate Old School Runescapes Boss Nex's drops.
 
-Currently, two official plugins are available:
+The simulator can be found [here](https://teekiz.github.io/nex-sim/).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+Includes customisable input options:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Contribution range (between 0% to 100%) to capture damage contribution. <br>
+![Contribution gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/contribution.gif)
+- Team sizes ranges supporting solos to masses (up to 60 players).
+- Dynamic MVP simulation based on the contribution and team size (Higher damage in smaller teams improves chances of receiving MVP status).
+- Simulates multiple kills automatically until one of the selected conditions is met:
+  - Kill count met
+  - Shards received
+  - Uniques received
+  - Pet received
+  - All selected items are received
+  - Until the collection log has been completed (green log)
+<br>![Teamsize and conditions gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/teamsizeconditions.gif)
+- A collection log to display the quantity of items received.
+- An item log to display all items received alongside the drop count they were received at.
+  <br>![Collection log and item log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/collectionlog.gif)
 
-## Expanding the ESLint configuration
+- Player stats including: 
+  - Total uniques.
+  - Shards per drop
+  - Actual drop rate (Total uniques / kill count)
+  - MVP percentage
+  - Current and longest dry streaks.
+    <br>![Collection log and item log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/stats.gif)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Feedback
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Any feedback is welcome including feature requests and bug reports. Please submit feedback [here](https://github.com/Teekiz/nex-sim/issues/new).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Credits
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-Fonts from https://github.com/RuneStar/fonts
-```
+- [Runestar](https://github.com/RuneStar/fonts) - Old School Runescape Fonts.
+- [Old School RuneScape Wiki]() - Source of all OSRS images, icons and drop table information. See [here](https://oldschool.runescape.wiki/w/Nex) for more information.
