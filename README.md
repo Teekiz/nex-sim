@@ -33,6 +33,7 @@ The simulator can be found [here](https://teekiz.github.io/nex-sim/).
   - Actual drop rate (Total uniques / kill count)
   - MVP percentage
   - Current and longest dry streaks.
+
 ![Collection log and item log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/stats.gif)
 
 ## Feedback
