@@ -6,12 +6,14 @@ The simulator can be found [here](https://teekiz.github.io/nex-sim/).
 
 ## Features
 
-Includes customisable input options:
+- Contribution range (between 0% to 100%) to capture damage contribution.  
+  ![Contribution gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/contribution.gif)
 
-- Contribution range (between 0% to 100%) to capture damage contribution. <br>
-![Contribution gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/contribution.gif)
-- Team sizes ranges supporting solos to masses (up to 60 players).
+- Team sizes ranges supporting solos to masses (up to 60 players).  
+  ![Teamsize gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/teamsizeconditions.gif)
+  
 - Dynamic MVP simulation based on the contribution and team size (Higher damage in smaller teams improves chances of receiving MVP status).
+  
 - Simulates multiple kills automatically until one of the selected conditions is met:
   - Kill count met
   - Shards received
@@ -19,10 +21,11 @@ Includes customisable input options:
   - Pet received
   - All selected items are received
   - Until the collection log has been completed (green log)
-<br>![Teamsize and conditions gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/teamsizeconditions.gif)
+
 - A collection log to display the quantity of items received.
+  
 - An item log to display all items received alongside the drop count they were received at.
-  <br>![Collection log and item log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/collectionlog.gif)
+  ![Collection log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/collectionlog.gif)
 
 - Player stats including: 
   - Total uniques.
@@ -30,7 +33,7 @@ Includes customisable input options:
   - Actual drop rate (Total uniques / kill count)
   - MVP percentage
   - Current and longest dry streaks.
-    <br>![Collection log and item log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/stats.gif)
+![Collection log and item log gif](https://github.com/Teekiz/nex-sim/blob/master/readmefiles/stats.gif)
 
 ## Feedback
 
